@@ -30,14 +30,18 @@ class Uuid {
         '${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}${_bitsDigits(16, 4)}';
   }
 
-  String _bitsDigits(int bitCount, int digitCount) => _printDigits(_generateBits(bitCount), digitCount);
+  String _bitsDigits(int bitCount, int digitCount) =>
+      _printDigits(_generateBits(bitCount), digitCount);
 
   int _generateBits(int bitCount) => _random.nextInt(1 << bitCount);
 
-  String _printDigits(int value, int count) => value.toRadixString(16).padLeft(count, '0');
+  String _printDigits(int value, int count) =>
+      value.toRadixString(16).padLeft(count, '0');
 
   // caf06b11-ceef-498b-a551-2ce18c1f8c6f
   static bool isUuid(String input) {
-    return RegExp("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}").hasMatch(input);
+    return RegExp(
+            "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+        .hasMatch(input);
   }
 }

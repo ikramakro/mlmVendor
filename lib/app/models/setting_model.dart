@@ -81,7 +81,8 @@ class Setting extends Model {
     enableRazorpay = boolFromJson(json, 'enable_razorpay');
     enableStripe = boolFromJson(json, 'enable_stripe');
     enablePaypal = boolFromJson(json, 'enable_paypal');
-    defaultCurrencyDecimalDigits = int.tryParse(json['default_currency_decimal_digits'] ?? '2') ?? 2;
+    defaultCurrencyDecimalDigits =
+        int.tryParse(json['default_currency_decimal_digits'] ?? '2') ?? 2;
     distanceUnit = stringFromJson(json, 'distance_unit');
     enableOtp = boolFromJson(json, 'enable_otp');
   }

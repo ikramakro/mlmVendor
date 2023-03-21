@@ -55,7 +55,8 @@ class CheckoutView extends GetView<CheckoutController> {
                       overflow: TextOverflow.ellipsis,
                       style: Get.textTheme.headline5,
                     ),
-                    subtitle: Text("Select your preferred payment mode".tr, style: Get.textTheme.caption),
+                    subtitle: Text("Select your preferred payment mode".tr,
+                        style: Get.textTheme.caption),
                   ),
                 ),
                 ListView.separated(
@@ -67,8 +68,10 @@ class CheckoutView extends GetView<CheckoutController> {
                     return SizedBox(height: 10);
                   },
                   itemBuilder: (context, index) {
-                    var _paymentMethod = controller.paymentsList.elementAt(index);
-                    return PaymentMethodItemWidget(paymentMethod: _paymentMethod);
+                    var _paymentMethod =
+                        controller.paymentsList.elementAt(index);
+                    return PaymentMethodItemWidget(
+                        paymentMethod: _paymentMethod);
                   },
                 ),
               ],
@@ -76,7 +79,8 @@ class CheckoutView extends GetView<CheckoutController> {
           }),
         ),
       ),
-      bottomNavigationBar: buildBottomWidget(Get.arguments as EProviderSubscription),
+      bottomNavigationBar:
+          buildBottomWidget(Get.arguments as EProviderSubscription),
     );
   }
 
@@ -87,7 +91,10 @@ class CheckoutView extends GetView<CheckoutController> {
         color: Get.theme.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
         boxShadow: [
-          BoxShadow(color: Get.theme.focusColor.withOpacity(0.1), blurRadius: 10, offset: Offset(0, -5)),
+          BoxShadow(
+              color: Get.theme.focusColor.withOpacity(0.1),
+              blurRadius: 10,
+              offset: Offset(0, -5)),
         ],
       ),
       child: Column(
@@ -108,7 +115,8 @@ class CheckoutView extends GetView<CheckoutController> {
                       ),
                     ),
                   ),
-                  Icon(Icons.arrow_forward_ios, color: Get.theme.primaryColor, size: 20)
+                  Icon(Icons.arrow_forward_ios,
+                      color: Get.theme.primaryColor, size: 20)
                 ],
               ),
               color: Get.theme.colorScheme.secondary,

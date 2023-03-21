@@ -25,7 +25,8 @@ class Chat extends Model {
       id = jsonMap.id;
       text = jsonMap.get('text') != null ? jsonMap.get('text').toString() : '';
       time = jsonMap.get('time') != null ? jsonMap.get('time') : 0;
-      userId = jsonMap.get('user') != null ? jsonMap.get('user').toString() : null;
+      userId =
+          jsonMap.get('user') != null ? jsonMap.get('user').toString() : null;
     } catch (e) {
       id = null;
       text = '';
@@ -49,8 +50,19 @@ class Chat extends Model {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      super == other && other is Chat && runtimeType == other.runtimeType && id == other.id && text == other.text && time == other.time && userId == other.userId;
+      super == other &&
+          other is Chat &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          text == other.text &&
+          time == other.time &&
+          userId == other.userId;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ text.hashCode ^ time.hashCode ^ userId.hashCode;
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      text.hashCode ^
+      time.hashCode ^
+      userId.hashCode;
 }

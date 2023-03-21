@@ -26,7 +26,8 @@ class CheckoutController extends GetxController {
     eProviderSubscription.value = Get.arguments as EProviderSubscription;
     await loadPaymentMethodsList();
     await loadWalletList();
-    selectedPaymentMethod.value = this.paymentsList.firstWhere((element) => element.isDefault);
+    selectedPaymentMethod.value =
+        this.paymentsList.firstWhere((element) => element.isDefault);
     super.onInit();
   }
 
@@ -40,7 +41,8 @@ class CheckoutController extends GetxController {
 
   Future loadWalletList() async {
     try {
-      var _walletIndex = paymentsList.indexWhere((element) => element.route.toLowerCase() == Routes.WALLET);
+      var _walletIndex = paymentsList.indexWhere(
+          (element) => element.route.toLowerCase() == Routes.WALLET);
       if (_walletIndex > -1) {
         // wallet payment method enabled
         // remove existing wallet method
@@ -63,10 +65,14 @@ class CheckoutController extends GetxController {
 
   void paySubscription(EProviderSubscription _eProviderSubscription) async {
     try {
-      _eProviderSubscription.payment = new Payment(paymentMethod: selectedPaymentMethod.value);
+      _eProviderSubscription.payment =
+          new Payment(paymentMethod: selectedPaymentMethod.value);
       if (selectedPaymentMethod.value.route != null) {
         Get.offAndToNamed(selectedPaymentMethod.value.route.toLowerCase(),
-            arguments: {'eProviderSubscription': _eProviderSubscription, 'wallet': selectedPaymentMethod.value.wallet});
+            arguments: {
+              'eProviderSubscription': _eProviderSubscription,
+              'wallet': selectedPaymentMethod.value.wallet
+            });
       }
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
@@ -75,16 +81,21 @@ class CheckoutController extends GetxController {
 
   TextStyle getTitleTheme(PaymentMethod paymentMethod) {
     if (paymentMethod == selectedPaymentMethod.value) {
-      return Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor));
-    } else if (paymentMethod.wallet != null && paymentMethod.wallet.balance < eProviderSubscription.value.subscriptionPackage.getPrice) {
-      return Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.focusColor));
+      return Get.textTheme.bodyText2
+          .merge(TextStyle(color: Get.theme.primaryColor));
+    } else if (paymentMethod.wallet != null &&
+        paymentMethod.wallet.balance <
+            eProviderSubscription.value.subscriptionPackage.getPrice) {
+      return Get.textTheme.bodyText2
+          .merge(TextStyle(color: Get.theme.focusColor));
     }
     return Get.textTheme.bodyText2;
   }
 
   TextStyle getSubTitleTheme(PaymentMethod paymentMethod) {
     if (paymentMethod == selectedPaymentMethod.value) {
-      return Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor));
+      return Get.textTheme.caption
+          .merge(TextStyle(color: Get.theme.primaryColor));
     }
     return Get.textTheme.caption;
   }
@@ -96,7 +107,8 @@ class CheckoutController extends GetxController {
     return null;
   }
 
-  void _insertWalletsPaymentMethod(int _walletIndex, PaymentMethod _walletPaymentMethod) {
+  void _insertWalletsPaymentMethod(
+      int _walletIndex, PaymentMethod _walletPaymentMethod) {
     walletList.forEach((_walletElement) {
       paymentsList.insert(
           _walletIndex,

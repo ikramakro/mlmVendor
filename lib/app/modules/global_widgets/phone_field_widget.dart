@@ -73,13 +73,12 @@ class PhoneFieldWidget extends StatelessWidget {
             textAlign: textAlign ?? TextAlign.center,
           ),
           Text(
-
             labelText ?? "",
             style: Get.textTheme.bodyText1,
             textAlign: textAlign ?? TextAlign.start,
           ),
           IntlPhoneField(
-              readOnly: readOnly??false,
+              readOnly: readOnly ?? false,
               key: key,
               onSaved: onSaved,
               onChanged: onChanged,

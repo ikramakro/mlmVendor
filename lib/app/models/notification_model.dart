@@ -16,7 +16,8 @@ class Notification extends Model {
     type = stringFromJson(json, 'type');
     data = mapFromJson(json, 'data');
     read = boolFromJson(json, 'read_at');
-    createdAt = dateFromJson(json, 'created_at', defaultValue: DateTime.now().toLocal());
+    createdAt = dateFromJson(json, 'created_at',
+        defaultValue: DateTime.now().toLocal());
   }
 
   Map markReadMap() {

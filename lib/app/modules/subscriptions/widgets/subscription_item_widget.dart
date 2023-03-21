@@ -37,20 +37,30 @@ class SubscriptionItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
-                    text: TextSpan(text: "Starts At".tr, style: Get.textTheme.bodyText1, children: <TextSpan>[
-                      TextSpan(
-                        text: DateFormat('  d, MMMM y  HH:mm', Get.locale.toString()).format(subscription.startsAt),
-                        style: Get.textTheme.caption,
-                      ),
-                    ]),
+                    text: TextSpan(
+                        text: "Starts At".tr,
+                        style: Get.textTheme.bodyText1,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: DateFormat(
+                                    '  d, MMMM y  HH:mm', Get.locale.toString())
+                                .format(subscription.startsAt),
+                            style: Get.textTheme.caption,
+                          ),
+                        ]),
                   ),
                   RichText(
-                    text: TextSpan(text: "Expires At".tr, style: Get.textTheme.bodyText1, children: <TextSpan>[
-                      TextSpan(
-                        text: DateFormat('  d, MMMM y  HH:mm', Get.locale.toString()).format(subscription.expiresAt),
-                        style: Get.textTheme.caption,
-                      ),
-                    ]),
+                    text: TextSpan(
+                        text: "Expires At".tr,
+                        style: Get.textTheme.bodyText1,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: DateFormat(
+                                    '  d, MMMM y  HH:mm', Get.locale.toString())
+                                .format(subscription.expiresAt),
+                            style: Get.textTheme.caption,
+                          ),
+                        ]),
                   ),
                 ],
               ),

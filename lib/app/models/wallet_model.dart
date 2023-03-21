@@ -38,7 +38,9 @@ class Wallet extends Model {
 
   String getId() {
     if (Uuid.isUuid(id)) {
-      return id.substring(0, 3) + ' . . . ' + id.substring(id.length - 5, id.length);
+      return id.substring(0, 3) +
+          ' . . . ' +
+          id.substring(id.length - 5, id.length);
     } else {
       return id;
     }

@@ -15,7 +15,8 @@ import 'auth_service.dart';
 
 class FireBaseMessagingService extends GetxService {
   Future<FireBaseMessagingService> init() async {
-    FirebaseMessaging.instance.requestPermission(sound: true, badge: true, alert: true);
+    FirebaseMessaging.instance
+        .requestPermission(sound: true, badge: true, alert: true);
     await fcmOnLaunchListeners();
     await fcmOnResumeListeners();
     await fcmOnMessageListeners();
@@ -36,7 +37,8 @@ class FireBaseMessagingService extends GetxService {
   }
 
   Future fcmOnLaunchListeners() async {
-    RemoteMessage message = await FirebaseMessaging.instance.getInitialMessage();
+    RemoteMessage message =
+        await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
       _notificationsBackground(message);
     }
@@ -58,18 +60,21 @@ class FireBaseMessagingService extends GetxService {
 
   void _newBookingNotificationBackground(message) {
     if (Get.isRegistered<RootController>()) {
-      Get.toNamed(Routes.BOOKING, arguments: new Booking(id: message.data['bookingId']));
+      Get.toNamed(Routes.BOOKING,
+          arguments: new Booking(id: message.data['bookingId']));
     }
   }
 
   void _newMessageNotificationBackground(RemoteMessage message) {
     if (message.data['messageId'] != null) {
-      Get.toNamed(Routes.CHAT, arguments: new Message([], id: message.data['messageId']));
+      Get.toNamed(Routes.CHAT,
+          arguments: new Message([], id: message.data['messageId']));
     }
   }
 
   Future<void> setDeviceToken() async {
-    Get.find<AuthService>().user.value.deviceToken = await FirebaseMessaging.instance.getToken();
+    Get.find<AuthService>().user.value.deviceToken =
+        await FirebaseMessaging.instance.getToken();
   }
 
   void _bookingNotification(RemoteMessage message) {
@@ -105,7 +110,8 @@ class FireBaseMessagingService extends GetxService {
       onTap: (getBar) async {
         if (message.data['bookingId'] != null) {
           await Get.back();
-          Get.toNamed(Routes.BOOKING, arguments: new Booking(id: message.data['bookingId']));
+          Get.toNamed(Routes.BOOKING,
+              arguments: new Booking(id: message.data['bookingId']));
         }
       },
     ));
@@ -142,7 +148,8 @@ class FireBaseMessagingService extends GetxService {
         onTap: (getBar) async {
           if (message.data['messageId'] != null) {
             await Get.back();
-            Get.toNamed(Routes.CHAT, arguments: new Message([], id: message.data['messageId']));
+            Get.toNamed(Routes.CHAT,
+                arguments: new Message([], id: message.data['messageId']));
           }
         },
       ));

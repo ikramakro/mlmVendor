@@ -21,14 +21,16 @@ class SubscriptionsController extends GetxController {
   Future refreshSubscriptions({bool showMessage}) async {
     await getSubscriptions();
     if (showMessage == true) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "List of subscriptions refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(
+          message: "List of subscriptions refreshed successfully".tr));
     }
   }
 
   Future getSubscriptions() async {
     try {
       eProviderSubscriptions.clear();
-      eProviderSubscriptions.assignAll(await _subscriptionRepository.getEProviderSubscriptions());
+      eProviderSubscriptions
+          .assignAll(await _subscriptionRepository.getEProviderSubscriptions());
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

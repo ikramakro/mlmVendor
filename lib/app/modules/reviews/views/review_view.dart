@@ -28,12 +28,14 @@ class ReviewView extends GetView<ReviewController> {
               iconTheme: IconThemeData(color: Get.theme.hintColor),
               title: Text(
                 "Review Details".tr,
-                style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                style: Get.textTheme.headline6
+                    .merge(TextStyle(color: Get.theme.hintColor)),
               ),
               centerTitle: true,
               automaticallyImplyLeading: false,
               leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
+                icon:
+                    new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
                 onPressed: () => {Get.back()},
               ),
               flexibleSpace: FlexibleSpaceBar(
@@ -43,20 +45,30 @@ class ReviewView extends GetView<ReviewController> {
                     padding: EdgeInsets.only(top: 75),
                     decoration: new BoxDecoration(
                       gradient: new LinearGradient(
-                          colors: [Get.theme.colorScheme.secondary.withOpacity(1), Get.theme.scaffoldBackgroundColor],
+                          colors: [
+                            Get.theme.colorScheme.secondary.withOpacity(1),
+                            Get.theme.scaffoldBackgroundColor
+                          ],
                           begin: AlignmentDirectional.topCenter,
                           //const FractionalOffset(1, 0),
                           end: AlignmentDirectional.bottomCenter,
                           stops: [0.1, 0.8],
                           tileMode: TileMode.clamp),
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5)),
                     ),
                     child: Column(
                       children: [
                         Text(controller.review.value.rate.toString(),
-                            style: Get.textTheme.headline1.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
+                            style: Get.textTheme.headline1.merge(TextStyle(
+                                color: Get.theme.hintColor,
+                                fontSize: 36,
+                                fontWeight: FontWeight.w600))),
                         Wrap(
-                          children: Ui.getStarsList(controller.review.value.rate, size: 32),
+                          children: Ui.getStarsList(
+                              controller.review.value.rate,
+                              size: 32),
                         ),
                       ],
                     ),

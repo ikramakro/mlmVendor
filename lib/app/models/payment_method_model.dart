@@ -16,7 +16,14 @@ class PaymentMethod extends Model {
   bool isDefault;
   Wallet wallet;
 
-  PaymentMethod({this.id, this.name, this.description, this.route, this.logo, this.wallet, this.isDefault = false});
+  PaymentMethod(
+      {this.id,
+      this.name,
+      this.description,
+      this.route,
+      this.logo,
+      this.wallet,
+      this.isDefault = false});
 
   PaymentMethod.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
@@ -55,5 +62,12 @@ class PaymentMethod extends Model {
           wallet == other.wallet;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ name.hashCode ^ description.hashCode ^ route.hashCode ^ order.hashCode ^ wallet.hashCode;
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      name.hashCode ^
+      description.hashCode ^
+      route.hashCode ^
+      order.hashCode ^
+      wallet.hashCode;
 }

@@ -24,7 +24,9 @@ class BookingNotificationItemWidget extends GetView<NotificationsController> {
         size: 34,
       ),
       onTap: (notification) async {
-        Get.toNamed(Routes.BOOKING, arguments: new Booking(id: notification.data['booking_id'].toString()));
+        Get.toNamed(Routes.BOOKING,
+            arguments:
+                new Booking(id: notification.data['booking_id'].toString()));
         await controller.markAsReadNotification(notification);
       },
     );

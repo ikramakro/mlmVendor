@@ -30,7 +30,8 @@ class CustomPagesController extends GetxController {
   Future<void> refreshCustomPage({bool showMessage = false}) async {
     await getCustomPage();
     if (showMessage) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "Page refreshed successfully".tr));
+      Get.showSnackbar(
+          Ui.SuccessSnackBar(message: "Page refreshed successfully".tr));
     }
   }
 

@@ -53,10 +53,13 @@ class WalletViewWidget extends GetView<WalletController> {
                   height: 130,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                        Colors.green.withOpacity(1),
-                        Colors.green.withOpacity(0.2),
-                      ])),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            Colors.green.withOpacity(1),
+                            Colors.green.withOpacity(0.2),
+                          ])),
                   child: Obx(() {
                     if (controller.isDone()) {
                       return Icon(
@@ -86,7 +89,9 @@ class WalletViewWidget extends GetView<WalletController> {
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                      color: Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withOpacity(0.15),
                       borderRadius: BorderRadius.circular(150),
                     ),
                   ),
@@ -98,7 +103,9 @@ class WalletViewWidget extends GetView<WalletController> {
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                      color: Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withOpacity(0.15),
                       borderRadius: BorderRadius.circular(150),
                     ),
                   ),
@@ -159,7 +166,10 @@ class WalletViewWidget extends GetView<WalletController> {
         color: Get.theme.primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(20)),
         boxShadow: [
-          BoxShadow(color: Get.theme.focusColor.withOpacity(0.1), blurRadius: 10, offset: Offset(0, -5)),
+          BoxShadow(
+              color: Get.theme.focusColor.withOpacity(0.1),
+              blurRadius: 10,
+              offset: Offset(0, -5)),
         ],
       ),
       child: BlockButtonWidget(
@@ -176,7 +186,8 @@ class WalletViewWidget extends GetView<WalletController> {
                   ),
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, color: Get.theme.primaryColor, size: 20)
+              Icon(Icons.arrow_forward_ios,
+                  color: Get.theme.primaryColor, size: 20)
             ],
           ),
           color: Get.theme.colorScheme.secondary,

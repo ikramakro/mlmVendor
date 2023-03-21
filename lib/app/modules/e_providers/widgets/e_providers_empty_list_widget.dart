@@ -23,10 +23,13 @@ class EProvidersEmptyListWidget extends StatelessWidget {
               height: 130,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                    Colors.grey.withOpacity(0.6),
-                    Colors.grey.withOpacity(0.2),
-                  ])),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Colors.grey.withOpacity(0.6),
+                        Colors.grey.withOpacity(0.2),
+                      ])),
               child: Icon(
                 Icons.build_circle_outlined,
                 color: Theme.of(context).scaffoldBackgroundColor,
@@ -40,7 +43,9 @@ class EProvidersEmptyListWidget extends StatelessWidget {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                  color: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.15),
                   borderRadius: BorderRadius.circular(150),
                 ),
               ),
@@ -52,7 +57,9 @@ class EProvidersEmptyListWidget extends StatelessWidget {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                  color: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.15),
                   borderRadius: BorderRadius.circular(150),
                 ),
               ),
@@ -73,9 +80,11 @@ class EProvidersEmptyListWidget extends StatelessWidget {
           color: Get.theme.colorScheme.secondary,
           text: Text(
             "Become a Service Provider".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor)),
+            style: Get.textTheme.headline6
+                .merge(TextStyle(color: Get.theme.primaryColor)),
           ).paddingSymmetric(horizontal: 20, vertical: 3),
-          onPressed: () => {Get.offAndToNamed(Routes.E_PROVIDER_ADDRESSES_FORM)},
+          onPressed: () =>
+              {Get.offAndToNamed(Routes.E_PROVIDER_ADDRESSES_FORM)},
         ),
       ],
     );

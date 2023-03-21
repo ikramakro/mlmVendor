@@ -13,7 +13,8 @@ class WalletTransaction extends Model {
   DateTime dateTime;
   User user;
 
-  WalletTransaction({this.id, this.amount, this.description, this.action, this.user});
+  WalletTransaction(
+      {this.id, this.amount, this.description, this.action, this.user});
 
   WalletTransaction.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
@@ -43,6 +44,7 @@ class WalletTransaction extends Model {
 
   String getDescription() {
     description = description ?? "";
-    return description.substring(description.length - min(description.length, 20), description.length);
+    return description.substring(
+        description.length - min(description.length, 20), description.length);
   }
 }

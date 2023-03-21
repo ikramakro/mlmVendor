@@ -35,7 +35,8 @@ class ReviewItemWidget extends StatelessWidget {
                     height: 65,
                     width: 65,
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.error_outline),
                 ),
               ),
               SizedBox(width: 15),
@@ -48,7 +49,8 @@ class ReviewItemWidget extends StatelessWidget {
                       overflow: TextOverflow.fade,
                       softWrap: false,
                       maxLines: 2,
-                      style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.hintColor)),
+                      style: Get.textTheme.bodyText2
+                          .merge(TextStyle(color: Get.theme.hintColor)),
                     ),
                     Text(
                       review.user.bio,
@@ -65,7 +67,9 @@ class ReviewItemWidget extends StatelessWidget {
                   label: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(review.rate.toString(), style: Get.textTheme.bodyText1.merge(TextStyle(color: Get.theme.primaryColor))),
+                      Text(review.rate.toString(),
+                          style: Get.textTheme.bodyText1
+                              .merge(TextStyle(color: Get.theme.primaryColor))),
                       Icon(
                         Icons.star_border,
                         color: Get.theme.primaryColor,
@@ -73,7 +77,8 @@ class ReviewItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  backgroundColor: Get.theme.colorScheme.secondary.withOpacity(0.9),
+                  backgroundColor:
+                      Get.theme.colorScheme.secondary.withOpacity(0.9),
                   shape: StadiumBorder(),
                 ),
               ),

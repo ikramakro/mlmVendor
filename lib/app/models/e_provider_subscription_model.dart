@@ -18,15 +18,25 @@ class EProviderSubscription extends Model {
   Payment payment;
   bool active;
 
-  EProviderSubscription({this.id, this.eProvider, this.subscriptionPackage, this.startsAt, this.expiresAt, this.payment, this.active});
+  EProviderSubscription(
+      {this.id,
+      this.eProvider,
+      this.subscriptionPackage,
+      this.startsAt,
+      this.expiresAt,
+      this.payment,
+      this.active});
 
   EProviderSubscription.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
-    eProvider = objectFromJson(json, 'e_provider', (value) => EProvider.fromJson(value));
-    subscriptionPackage = objectFromJson(json, 'subscription_package', (value) => SubscriptionPackage.fromJson(value));
+    eProvider = objectFromJson(
+        json, 'e_provider', (value) => EProvider.fromJson(value));
+    subscriptionPackage = objectFromJson(json, 'subscription_package',
+        (value) => SubscriptionPackage.fromJson(value));
     startsAt = dateFromJson(json, 'starts_at', defaultValue: null);
     expiresAt = dateFromJson(json, 'expires_at', defaultValue: null);
-    payment = objectFromJson(json, 'payment', (value) => Payment.fromJson(value));
+    payment =
+        objectFromJson(json, 'payment', (value) => Payment.fromJson(value));
     active = boolFromJson(json, 'active');
   }
 

@@ -20,18 +20,21 @@ class FlutterWaveController extends GetxController {
 
   @override
   void onInit() {
-    eProviderSubscription.value = Get.arguments['eProviderSubscription'] as EProviderSubscription;
+    eProviderSubscription.value =
+        Get.arguments['eProviderSubscription'] as EProviderSubscription;
     getUrl();
     super.onInit();
   }
 
   void getUrl() {
-    url.value = _paymentRepository.getFlutterWaveUrl(eProviderSubscription.value);
+    url.value =
+        _paymentRepository.getFlutterWaveUrl(eProviderSubscription.value);
     print(url.value);
   }
 
   void showConfirmationIfSuccess() {
-    final _doneUrl = "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/flutterwave";
+    final _doneUrl =
+        "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/flutterwave";
     if (url == _doneUrl) {
       Get.toNamed(Routes.CONFIRMATION, arguments: {
         'title': "Payment Successful".tr,

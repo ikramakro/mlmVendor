@@ -25,14 +25,16 @@ class HelpController extends GetxController {
       await getFaqs(categoryId: categoryId);
     });
     if (showMessage == true) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "List of faqs refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(
+          message: "List of faqs refreshed successfully".tr));
     }
   }
 
   Future getFaqs({String categoryId}) async {
     try {
       if (categoryId == null) {
-        faqs.assignAll(await _faqRepository.getFaqs(faqCategories.elementAt(0).id));
+        faqs.assignAll(
+            await _faqRepository.getFaqs(faqCategories.elementAt(0).id));
       } else {
         faqs.assignAll(await _faqRepository.getFaqs(categoryId));
       }

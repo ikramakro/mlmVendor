@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BlockButtonWidget extends StatelessWidget {
-  const BlockButtonWidget({Key key, @required this.color, @required this.text, @required this.onPressed}) : super(key: key);
+  const BlockButtonWidget(
+      {Key key,
+      @required this.color,
+      @required this.text,
+      @required this.onPressed})
+      : super(key: key);
 
   final Color color;
   final Widget text;
@@ -14,8 +19,14 @@ class BlockButtonWidget extends StatelessWidget {
       decoration: this.onPressed != null
           ? BoxDecoration(
               boxShadow: [
-                BoxShadow(color: this.color.withOpacity(0.3), blurRadius: 40, offset: Offset(0, 15)),
-                BoxShadow(color: this.color.withOpacity(0.2), blurRadius: 13, offset: Offset(0, 3))
+                BoxShadow(
+                    color: this.color.withOpacity(0.3),
+                    blurRadius: 40,
+                    offset: Offset(0, 15)),
+                BoxShadow(
+                    color: this.color.withOpacity(0.2),
+                    blurRadius: 13,
+                    offset: Offset(0, 3))
               ],
               // borderRadius: BorderRadius.all(Radius.circular(20)),
             )

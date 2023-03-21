@@ -36,5 +36,10 @@ class CustomPage extends Model {
           updatedAt == other.updatedAt;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ title.hashCode ^ content.hashCode ^ updatedAt.hashCode;
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      title.hashCode ^
+      content.hashCode ^
+      updatedAt.hashCode;
 }

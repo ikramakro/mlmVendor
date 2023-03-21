@@ -9,7 +9,12 @@ class Statistic extends Model {
   Color textColor;
   Color backgroundColor;
 
-  Statistic({this.id, this.value, this.description, this.textColor, this.backgroundColor});
+  Statistic(
+      {this.id,
+      this.value,
+      this.description,
+      this.textColor,
+      this.backgroundColor});
 
   Statistic.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);

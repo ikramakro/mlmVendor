@@ -36,7 +36,8 @@ class HelpView extends GetView<HelpController> {
                 ),
           title: Text(
             "Help & Faq".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
+            style: Get.textTheme.headline6.merge(
+                TextStyle(letterSpacing: 1.3, color: Get.theme.hintColor)),
           ),
           automaticallyImplyLeading: false,
           leading: new IconButton(
@@ -49,7 +50,8 @@ class HelpView extends GetView<HelpController> {
             Get.find<LaravelApiClient>().forceRefresh();
             controller.refreshFaqs(
               showMessage: true,
-              categoryId: Get.find<TabBarController>(tag: 'help').selectedId.value,
+              categoryId:
+                  Get.find<TabBarController>(tag: 'help').selectedId.value,
             );
             Get.find<LaravelApiClient>().unForceRefresh();
           },
@@ -61,7 +63,9 @@ class HelpView extends GetView<HelpController> {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Text("Help & Support".tr, style: Get.textTheme.headline5),
-                Text("Most frequently asked questions".tr, style: Get.textTheme.caption).paddingSymmetric(vertical: 5),
+                Text("Most frequently asked questions".tr,
+                        style: Get.textTheme.caption)
+                    .paddingSymmetric(vertical: 5),
                 Obx(() {
                   if (Get.find<LaravelApiClient>().isLoading(task: 'getFaqs')) {
                     return CircularLoadingWidget(height: 300);
@@ -76,7 +80,8 @@ class HelpView extends GetView<HelpController> {
                         return SizedBox(height: 15);
                       },
                       itemBuilder: (context, indexFaq) {
-                        return FaqItemWidget(faq: controller.faqs.elementAt(indexFaq));
+                        return FaqItemWidget(
+                            faq: controller.faqs.elementAt(indexFaq));
                       },
                     );
                   }

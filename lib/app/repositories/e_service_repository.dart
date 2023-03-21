@@ -13,7 +13,8 @@ class EServiceRepository {
     this._laravelApiClient = Get.find<LaravelApiClient>();
   }
 
-  Future<List<EService>> search(String keywords, List<String> categories, {int page = 1}) {
+  Future<List<EService>> search(String keywords, List<String> categories,
+      {int page = 1}) {
     return _laravelApiClient.searchEServices(keywords, categories, page);
   }
 

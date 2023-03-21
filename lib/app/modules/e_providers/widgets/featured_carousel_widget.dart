@@ -27,21 +27,28 @@ class FeaturedCarouselWidget extends GetWidget<EProviderController> {
               var _service = controller.featuredEServices.elementAt(index);
               return GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.E_SERVICE, arguments: {'eService': _service, 'heroTag': 'featured_carousel'});
+                  Get.toNamed(Routes.E_SERVICE, arguments: {
+                    'eService': _service,
+                    'heroTag': 'featured_carousel'
+                  });
                 },
                 child: Container(
                   width: 170,
-                  margin: EdgeInsetsDirectional.only(end: 20, start: index == 0 ? 20 : 0, top: 20, bottom: 10),
+                  margin: EdgeInsetsDirectional.only(
+                      end: 20, start: index == 0 ? 20 : 0, top: 20, bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Get.theme.focusColor.withOpacity(0.1)),
+                    border: Border.all(
+                        color: Get.theme.focusColor.withOpacity(0.1)),
                   ),
                   child: Column(
                     children: [
                       Hero(
                         tag: 'featured_carousel' + _service.id,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10)),
                           child: CachedNetworkImage(
                             height: 140,
                             width: double.infinity,
@@ -53,17 +60,21 @@ class FeaturedCarouselWidget extends GetWidget<EProviderController> {
                               width: double.infinity,
                               height: 140,
                             ),
-                            errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error_outline),
                           ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 10),
                         height: 135,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: Get.theme.primaryColor,
-                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,7 +83,8 @@ class FeaturedCarouselWidget extends GetWidget<EProviderController> {
                             Text(
                               _service.name ?? '',
                               maxLines: 2,
-                              style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.hintColor)),
+                              style: Get.textTheme.bodyText2
+                                  .merge(TextStyle(color: Get.theme.hintColor)),
                             ),
                             Wrap(
                               children: Ui.getStarsList(_service.rate),
@@ -94,12 +106,19 @@ class FeaturedCarouselWidget extends GetWidget<EProviderController> {
                                     if (_service.getOldPrice > 0)
                                       Ui.getPrice(
                                         _service.getOldPrice,
-                                        style: Get.textTheme.bodyText1.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
+                                        style: Get.textTheme.bodyText1.merge(
+                                            TextStyle(
+                                                color: Get.theme.focusColor,
+                                                decoration: TextDecoration
+                                                    .lineThrough)),
                                         unit: _service.getUnit,
                                       ),
                                     Ui.getPrice(
                                       _service.getPrice,
-                                      style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.colorScheme.secondary)),
+                                      style: Get.textTheme.bodyText2.merge(
+                                          TextStyle(
+                                              color: Get.theme.colorScheme
+                                                  .secondary)),
                                       unit: _service.getUnit,
                                     ),
                                   ],

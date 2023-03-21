@@ -75,7 +75,8 @@ class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
             value: "view",
           ),
         );
-        if (_booking.status.order == Get.find<GlobalService>().global.value.received) {
+        if (_booking.status.order ==
+            Get.find<GlobalService>().global.value.received) {
           list.add(
             PopupMenuItem(
               child: Wrap(
@@ -93,7 +94,8 @@ class BookingOptionsPopupMenuWidget extends GetView<HomeController> {
             ),
           );
         }
-        if (_booking.status.order < Get.find<GlobalService>().global.value.onTheWay) {
+        if (_booking.status.order <
+            Get.find<GlobalService>().global.value.onTheWay) {
           list.add(
             PopupMenuItem(
               child: Wrap(

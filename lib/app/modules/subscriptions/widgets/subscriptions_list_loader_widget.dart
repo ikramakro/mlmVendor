@@ -5,7 +5,8 @@ class SubscriptionsListLoaderWidget extends StatelessWidget {
   final int count;
   final double itemHeight;
 
-  const SubscriptionsListLoaderWidget({Key key, this.count, this.itemHeight}) : super(key: key);
+  const SubscriptionsListLoaderWidget({Key key, this.count, this.itemHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

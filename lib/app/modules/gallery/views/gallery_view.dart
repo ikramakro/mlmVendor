@@ -41,9 +41,11 @@ class GalleryView extends GetView<GalleryController> {
                     autoPlay: false,
                     viewportFraction: 1.0,
                     height: double.infinity,
-                    initialPage: controller.media.indexOf(controller.current.value),
+                    initialPage:
+                        controller.media.indexOf(controller.current.value),
                     onPageChanged: (index, reason) {
-                      controller.current.value = controller.media.elementAt(index);
+                      controller.current.value =
+                          controller.media.elementAt(index);
                     },
                   ),
                   items: controller.media.map((Media _media) {
@@ -62,8 +64,10 @@ class GalleryView extends GetView<GalleryController> {
                             width: double.infinity,
                             fit: BoxFit.contain,
                             imageUrl: _media.url,
-                            placeholder: (context, url) => CircularLoadingWidget(height: 200),
-                            errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                            placeholder: (context, url) =>
+                                CircularLoadingWidget(height: 200),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error_outline),
                           ),
                         ).marginSymmetric(horizontal: 20),
                       ),

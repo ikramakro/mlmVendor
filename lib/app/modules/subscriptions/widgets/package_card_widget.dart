@@ -27,7 +27,8 @@ class PackageCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,12 +45,16 @@ class PackageCardWidget extends StatelessWidget {
                       children: [
                         Ui.getPrice(
                           subscriptionPackage.getPrice,
-                          style: Get.textTheme.headline2.merge(TextStyle(fontSize: 28, color: Get.theme.colorScheme.secondary)),
+                          style: Get.textTheme.headline2.merge(TextStyle(
+                              fontSize: 28,
+                              color: Get.theme.colorScheme.secondary)),
                         ),
                         if (subscriptionPackage.getOldPrice > 0)
                           Ui.getPrice(
                             subscriptionPackage.getOldPrice,
-                            style: Get.textTheme.headline1.merge(TextStyle(color: Get.theme.focusColor, decoration: TextDecoration.lineThrough)),
+                            style: Get.textTheme.headline1.merge(TextStyle(
+                                color: Get.theme.focusColor,
+                                decoration: TextDecoration.lineThrough)),
                           ),
                       ],
                     ),
@@ -64,7 +69,8 @@ class PackageCardWidget extends StatelessWidget {
               alignment: AlignmentDirectional.centerEnd,
               decoration: BoxDecoration(
                 color: Get.theme.colorScheme.secondary.withOpacity(0.1),
-                borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(10)),
               ),
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               child: Wrap(
@@ -72,7 +78,8 @@ class PackageCardWidget extends StatelessWidget {
                 children: [
                   Text(
                     "Choose Package".tr,
-                    style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.colorScheme.secondary)),
+                    style: Get.textTheme.bodyText2.merge(
+                        TextStyle(color: Get.theme.colorScheme.secondary)),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),

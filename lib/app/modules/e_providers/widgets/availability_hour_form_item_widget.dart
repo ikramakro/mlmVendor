@@ -5,7 +5,8 @@ import '../../../models/availability_hour_model.dart';
 import '../../global_widgets/confirm_dialog.dart';
 import '../controllers/e_provider_availability_form_controller.dart';
 
-class AvailabilityHourFromItemWidget extends GetView<EProviderAvailabilityFormController> {
+class AvailabilityHourFromItemWidget
+    extends GetView<EProviderAvailabilityFormController> {
   const AvailabilityHourFromItemWidget({
     Key key,
     @required MapEntry<String, List<AvailabilityHour>> availabilityHour,
@@ -62,7 +63,12 @@ class AvailabilityHourFromItemWidget extends GetView<EProviderAvailabilityFormCo
                         context: context,
                         builder: (BuildContext context) {
                           return ConfirmDialog(
-                              title: "Delete Availability Hour".tr, content: "Are you sure you want to delete this slot?".tr, submitText: "Submit".tr, cancelText: "Cancel".tr);
+                              title: "Delete Availability Hour".tr,
+                              content:
+                                  "Are you sure you want to delete this slot?"
+                                      .tr,
+                              submitText: "Submit".tr,
+                              cancelText: "Cancel".tr);
                         },
                       );
                       if (confirm && _hour.hasData) {

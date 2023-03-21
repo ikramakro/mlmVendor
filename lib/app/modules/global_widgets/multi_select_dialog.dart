@@ -9,7 +9,14 @@ class MultiSelectDialogItem<V> {
 }
 
 class MultiSelectDialog<V> extends StatefulWidget {
-  MultiSelectDialog({Key key, this.items, this.initialSelectedValues, this.title, this.submitText, this.cancelText}) : super(key: key);
+  MultiSelectDialog(
+      {Key key,
+      this.items,
+      this.initialSelectedValues,
+      this.title,
+      this.submitText,
+      this.cancelText})
+      : super(key: key);
 
   final List<MultiSelectDialogItem<V>> items;
   final Set<V> initialSelectedValues;

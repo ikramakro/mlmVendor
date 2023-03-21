@@ -31,29 +31,35 @@ class WalletBalanceCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                    Get.theme.colorScheme.secondary.withOpacity(1),
-                    Get.theme.colorScheme.secondary.withOpacity(0.6),
-                    Get.theme.colorScheme.secondary.withOpacity(0.1),
-                  ])),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Get.theme.colorScheme.secondary.withOpacity(1),
+                        Get.theme.colorScheme.secondary.withOpacity(0.6),
+                        Get.theme.colorScheme.secondary.withOpacity(0.1),
+                      ])),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Ui.getPrice(
                     wallet.balance,
-                    style: Get.textTheme.headline2.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 28)),
+                    style: Get.textTheme.headline2.merge(
+                        TextStyle(color: Get.theme.primaryColor, fontSize: 28)),
                   ),
                   SizedBox(height: 20),
                   Text(
                     wallet.name ?? '',
-                    style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor)),
+                    style: Get.textTheme.bodyText2
+                        .merge(TextStyle(color: Get.theme.primaryColor)),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   ),
                   Text(
                     wallet.getId(),
-                    style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor)),
+                    style: Get.textTheme.caption
+                        .merge(TextStyle(color: Get.theme.primaryColor)),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   )
@@ -66,7 +72,8 @@ class WalletBalanceCard extends StatelessWidget {
               width: 230,
               height: 230,
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                color:
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(150),
               ),
             ),
@@ -78,7 +85,8 @@ class WalletBalanceCard extends StatelessWidget {
               width: 160,
               height: 160,
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                color:
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(150),
               ),
             ),

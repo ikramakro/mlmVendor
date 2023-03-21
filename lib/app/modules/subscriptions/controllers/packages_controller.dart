@@ -30,14 +30,16 @@ class PackagesController extends GetxController {
     await getEProviders();
     await getSubscriptionPackages();
     if (showMessage == true) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "List of packages refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(
+          message: "List of packages refreshed successfully".tr));
     }
   }
 
   Future getSubscriptionPackages() async {
     try {
       subscriptionPackages.clear();
-      subscriptionPackages.assignAll(await _subscriptionRepository.getSubscriptionPackages());
+      subscriptionPackages
+          .assignAll(await _subscriptionRepository.getSubscriptionPackages());
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }

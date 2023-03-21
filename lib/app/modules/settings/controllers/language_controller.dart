@@ -17,7 +17,8 @@ class LanguageController extends GetxController {
     await Get.find<TranslationService>().loadTranslation(locale: value);
     if (value.contains('_')) {
       // en_US
-      Get.updateLocale(Locale(value.split('_').elementAt(0), value.split('_').elementAt(1)));
+      Get.updateLocale(
+          Locale(value.split('_').elementAt(0), value.split('_').elementAt(1)));
     } else {
       // en
       Get.updateLocale(Locale(value));

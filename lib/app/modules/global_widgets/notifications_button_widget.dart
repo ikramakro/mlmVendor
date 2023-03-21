@@ -42,14 +42,20 @@ class NotificationsButtonWidget extends GetView<RootController> {
                   controller.notificationsCount.value.toString(),
                   textAlign: TextAlign.center,
                   style: Get.textTheme.caption.merge(
-                    TextStyle(color: Get.theme.primaryColor, fontSize: 9, height: 1.4),
+                    TextStyle(
+                        color: Get.theme.primaryColor,
+                        fontSize: 9,
+                        height: 1.4),
                   ),
                 ),
               );
             }),
             padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(color: labelColor ?? Get.theme.colorScheme.secondary, borderRadius: BorderRadius.all(Radius.circular(10))),
-            constraints: BoxConstraints(minWidth: 16, maxWidth: 16, minHeight: 16, maxHeight: 16),
+            decoration: BoxDecoration(
+                color: labelColor ?? Get.theme.colorScheme.secondary,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            constraints: BoxConstraints(
+                minWidth: 16, maxWidth: 16, minHeight: 16, maxHeight: 16),
           ),
         ],
       ),

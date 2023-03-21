@@ -17,7 +17,8 @@ class WalletController extends GetxController {
 
   @override
   void onInit() {
-    eProviderSubscription.value = Get.arguments['eProviderSubscription'] as EProviderSubscription;
+    eProviderSubscription.value =
+        Get.arguments['eProviderSubscription'] as EProviderSubscription;
     wallet.value = Get.arguments['wallet'] as Wallet;
     paySubscription();
     super.onInit();
@@ -25,21 +26,25 @@ class WalletController extends GetxController {
 
   Future paySubscription() async {
     try {
-      eProviderSubscription.value = await _subscriptionRepository.walletEProviderSubscription(eProviderSubscription.value, wallet.value);
+      eProviderSubscription.value =
+          await _subscriptionRepository.walletEProviderSubscription(
+              eProviderSubscription.value, wallet.value);
     } catch (e) {
       Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }
   }
 
   bool isLoading() {
-    if (eProviderSubscription.value != null && !eProviderSubscription.value.hasData) {
+    if (eProviderSubscription.value != null &&
+        !eProviderSubscription.value.hasData) {
       return true;
     }
     return false;
   }
 
   bool isDone() {
-    if (eProviderSubscription.value != null && eProviderSubscription.value.hasData) {
+    if (eProviderSubscription.value != null &&
+        eProviderSubscription.value.hasData) {
       return true;
     }
     return false;

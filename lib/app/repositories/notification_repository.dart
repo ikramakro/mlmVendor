@@ -27,7 +27,8 @@ class NotificationRepository {
     return _laravelApiClient.markAsReadNotification(notification);
   }
 
-  Future<bool> sendNotification(List<User> users, User from, String type, String text, String id) {
+  Future<bool> sendNotification(
+      List<User> users, User from, String type, String text, String id) {
     return _laravelApiClient.sendNotification(users, from, type, text, id);
   }
 }

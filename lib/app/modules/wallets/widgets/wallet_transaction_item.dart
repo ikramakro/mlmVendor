@@ -20,7 +20,8 @@ class WalletTransactionItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          DateFormat('  d, MMMM y - HH:mm', Get.locale.toString()).format(_transaction.dateTime),
+          DateFormat('  d, MMMM y - HH:mm', Get.locale.toString())
+              .format(_transaction.dateTime),
           style: Get.textTheme.caption,
         ),
         SizedBox(height: 5),
@@ -49,8 +50,14 @@ class WalletTransactionItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (_transaction.action == TransactionActions.CREDIT) Ui.getPrice(_transaction.amount, style: Get.textTheme.headline5.merge(TextStyle(color: Colors.green))),
-              if (_transaction.action == TransactionActions.DEBIT) Ui.getPrice(-_transaction.amount, style: Get.textTheme.headline5.merge(TextStyle(color: Colors.red))),
+              if (_transaction.action == TransactionActions.CREDIT)
+                Ui.getPrice(_transaction.amount,
+                    style: Get.textTheme.headline5
+                        .merge(TextStyle(color: Colors.green))),
+              if (_transaction.action == TransactionActions.DEBIT)
+                Ui.getPrice(-_transaction.amount,
+                    style: Get.textTheme.headline5
+                        .merge(TextStyle(color: Colors.red))),
             ],
           ),
         ),

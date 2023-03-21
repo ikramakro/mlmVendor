@@ -20,7 +20,8 @@ class StripeFPXController extends GetxController {
 
   @override
   void onInit() {
-    eProviderSubscription.value = Get.arguments['eProviderSubscription'] as EProviderSubscription;
+    eProviderSubscription.value =
+        Get.arguments['eProviderSubscription'] as EProviderSubscription;
     getUrl();
     super.onInit();
   }
@@ -31,7 +32,8 @@ class StripeFPXController extends GetxController {
   }
 
   void showConfirmationIfSuccess() {
-    final _doneUrl = "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/stripe-fpx";
+    final _doneUrl =
+        "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/stripe-fpx";
     if (url == _doneUrl) {
       Get.toNamed(Routes.CONFIRMATION, arguments: {
         'title': "Payment Successful".tr,

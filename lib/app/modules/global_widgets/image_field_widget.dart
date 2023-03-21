@@ -29,9 +29,11 @@ class ImageFieldController extends GetxController {
     uploading.value = false;
   }
 
-  Future pickImage(ImageSource source, String field, ValueChanged<String> uploadCompleted) async {
+  Future pickImage(ImageSource source, String field,
+      ValueChanged<String> uploadCompleted) async {
     ImagePicker imagePicker = ImagePicker();
-    XFile pickedFile = await imagePicker.pickImage(source: source, imageQuality: 80);
+    XFile pickedFile =
+        await imagePicker.pickImage(source: source, imageQuality: 80);
     File imageFile = File(pickedFile.path);
     print(imageFile);
     if (imageFile != null) {
@@ -48,7 +50,8 @@ class ImageFieldController extends GetxController {
       }
     } else {
       uploading.value = false;
-      Get.showSnackbar(Ui.ErrorSnackBar(message: "Please select an image file".tr));
+      Get.showSnackbar(
+          Ui.ErrorSnackBar(message: "Please select an image file".tr));
     }
   }
 
@@ -95,7 +98,10 @@ class ImageFieldWidget extends StatelessWidget {
           color: Get.theme.primaryColor,
           borderRadius: BorderRadius.all(Radius.circular(10)),
           boxShadow: [
-            BoxShadow(color: Get.theme.focusColor.withOpacity(0.1), blurRadius: 10, offset: Offset(0, 5)),
+            BoxShadow(
+                color: Get.theme.focusColor.withOpacity(0.1),
+                blurRadius: 10,
+                offset: Offset(0, 5)),
           ],
           border: Border.all(color: Get.theme.focusColor.withOpacity(0.05))),
       child: Column(
@@ -121,7 +127,8 @@ class ImageFieldWidget extends StatelessWidget {
                 },
                 shape: StadiumBorder(),
                 color: Get.theme.focusColor.withOpacity(0.1),
-                child: Text(buttonText ?? "Reset".tr, style: Get.textTheme.bodyText1),
+                child: Text(buttonText ?? "Reset".tr,
+                    style: Get.textTheme.bodyText1),
                 elevation: 0,
                 hoverElevation: 0,
                 focusElevation: 0,
@@ -194,14 +201,18 @@ class ImageFieldWidget extends StatelessWidget {
             else
               return GestureDetector(
                 onTap: () async {
-                  await controller.pickImage(ImageSource.gallery, field, uploadCompleted);
+                  await controller.pickImage(
+                      ImageSource.gallery, field, uploadCompleted);
                 },
                 child: Container(
                   width: 100,
                   height: 100,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: Get.theme.focusColor.withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
-                  child: Icon(Icons.add_photo_alternate_outlined, size: 42, color: Get.theme.focusColor.withOpacity(0.4)),
+                  decoration: BoxDecoration(
+                      color: Get.theme.focusColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Icon(Icons.add_photo_alternate_outlined,
+                      size: 42, color: Get.theme.focusColor.withOpacity(0.4)),
                 ),
               );
           }),

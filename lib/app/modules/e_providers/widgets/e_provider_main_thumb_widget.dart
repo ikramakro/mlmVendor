@@ -27,7 +27,8 @@ class EProviderMainThumbWidget extends StatelessWidget {
         Hero(
           tag: 'recommended_carousel' + _eProvider.id,
           child: ClipRRect(
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             child: CachedNetworkImage(
               height: 150,
               width: double.infinity,

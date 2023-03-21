@@ -23,7 +23,10 @@ class OptionItemWidget extends GetWidget<EServiceController> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.offAndToNamed(Routes.OPTIONS_FORM, arguments: {'eService': new EService(id: _option.eServiceId), 'option': _option});
+        Get.offAndToNamed(Routes.OPTIONS_FORM, arguments: {
+          'eService': new EService(id: _option.eServiceId),
+          'option': _option
+        });
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 3),
@@ -57,15 +60,18 @@ class OptionItemWidget extends GetWidget<EServiceController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(_option.name, style: Get.textTheme.bodyText2).paddingOnly(bottom: 5),
-                        Ui.applyHtml(_option.description, style: Get.textTheme.caption),
+                        Text(_option.name, style: Get.textTheme.bodyText2)
+                            .paddingOnly(bottom: 5),
+                        Ui.applyHtml(_option.description,
+                            style: Get.textTheme.caption),
                       ],
                     ),
                   ),
                   SizedBox(width: 8),
                   Ui.getPrice(
                     _option.price,
-                    style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                    style: Get.textTheme.headline6
+                        .merge(TextStyle(color: Get.theme.hintColor)),
                   ),
                 ],
               ),

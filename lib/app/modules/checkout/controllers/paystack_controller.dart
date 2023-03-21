@@ -20,7 +20,8 @@ class PayStackController extends GetxController {
 
   @override
   void onInit() {
-    eProviderSubscription.value = Get.arguments['eProviderSubscription'] as EProviderSubscription;
+    eProviderSubscription.value =
+        Get.arguments['eProviderSubscription'] as EProviderSubscription;
     getUrl();
     super.onInit();
   }
@@ -31,7 +32,8 @@ class PayStackController extends GetxController {
   }
 
   void showConfirmationIfSuccess() {
-    final _doneUrl = "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/paystack";
+    final _doneUrl =
+        "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/paystack";
     if (url == _doneUrl) {
       Get.toNamed(Routes.CONFIRMATION, arguments: {
         'title': "Payment Successful".tr,

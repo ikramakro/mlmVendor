@@ -17,11 +17,14 @@ class AddWalletCardWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                  Get.theme.focusColor.withOpacity(0.6),
-                  Get.theme.focusColor.withOpacity(0.3),
-                  Get.theme.focusColor.withOpacity(0.1),
-                ])),
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      Get.theme.focusColor.withOpacity(0.6),
+                      Get.theme.focusColor.withOpacity(0.3),
+                      Get.theme.focusColor.withOpacity(0.1),
+                    ])),
             child: Icon(
               Icons.add,
               size: 72,
@@ -34,7 +37,8 @@ class AddWalletCardWidget extends StatelessWidget {
             width: 230,
             height: 230,
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+              color:
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
               borderRadius: BorderRadius.circular(150),
             ),
           ),
@@ -46,7 +50,8 @@ class AddWalletCardWidget extends StatelessWidget {
             width: 160,
             height: 160,
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+              color:
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
               borderRadius: BorderRadius.circular(150),
             ),
           ),

@@ -13,7 +13,8 @@ class BookingsListWidget extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (Get.find<LaravelApiClient>().isLoading(task: 'getBookings') && controller.page.value == 1) {
+      if (Get.find<LaravelApiClient>().isLoading(task: 'getBookings') &&
+          controller.page.value == 1) {
         return BookingsListLoaderWidget();
       } else if (controller.bookings.isEmpty) {
         return BookingsEmptyListWidget();

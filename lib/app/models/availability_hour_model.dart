@@ -15,7 +15,8 @@ class AvailabilityHour extends Model {
   String data;
   EProvider eProvider;
 
-  AvailabilityHour({this.id, this.day, this.startAt, this.endAt, this.data, this.eProvider});
+  AvailabilityHour(
+      {this.id, this.day, this.startAt, this.endAt, this.data, this.eProvider});
 
   AvailabilityHour.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);
@@ -23,7 +24,8 @@ class AvailabilityHour extends Model {
     startAt = stringFromJson(json, 'start_at');
     endAt = stringFromJson(json, 'end_at');
     data = transStringFromJson(json, 'data');
-    eProvider = objectFromJson(json, 'e_provider', (value) => EProvider.fromJson(value));
+    eProvider = objectFromJson(
+        json, 'e_provider', (value) => EProvider.fromJson(value));
   }
 
   Map<String, dynamic> toJson() {
@@ -55,5 +57,12 @@ class AvailabilityHour extends Model {
           eProvider == other.eProvider;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ day.hashCode ^ startAt.hashCode ^ endAt.hashCode ^ data.hashCode ^ eProvider.hashCode;
+  int get hashCode =>
+      super.hashCode ^
+      id.hashCode ^
+      day.hashCode ^
+      startAt.hashCode ^
+      endAt.hashCode ^
+      data.hashCode ^
+      eProvider.hashCode;
 }

@@ -20,7 +20,8 @@ class PayPalController extends GetxController {
 
   @override
   void onInit() {
-    eProviderSubscription.value = Get.arguments['eProviderSubscription'] as EProviderSubscription;
+    eProviderSubscription.value =
+        Get.arguments['eProviderSubscription'] as EProviderSubscription;
     getUrl();
     super.onInit();
   }
@@ -31,7 +32,8 @@ class PayPalController extends GetxController {
   }
 
   void showConfirmationIfSuccess() {
-    final _doneUrl = "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/paypal";
+    final _doneUrl =
+        "${Helper.toUrl(Get.find<GlobalService>().baseUrl)}subscription/payments/paypal";
     if (url == _doneUrl) {
       // Get.find<BookingsController>().currentStatus.value = Get.find<BookingsController>().getStatusByOrder(50).id;
       // if (Get.isRegistered<TabBarController>(tag: 'bookings')) {

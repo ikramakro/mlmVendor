@@ -20,7 +20,8 @@ class ForgotPasswordView extends GetView<AuthController> {
         appBar: AppBar(
           title: Text(
             "Forgot Password".tr,
-            style: Get.textTheme.headline6.merge(TextStyle(color: context.theme.primaryColor)),
+            style: Get.textTheme.headline6
+                .merge(TextStyle(color: context.theme.primaryColor)),
           ),
           centerTitle: true,
           backgroundColor: Get.theme.colorScheme.secondary,
@@ -40,9 +41,13 @@ class ForgotPasswordView extends GetView<AuthController> {
                     width: Get.width,
                     decoration: BoxDecoration(
                       color: Get.theme.colorScheme.secondary,
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(10)),
                       boxShadow: [
-                        BoxShadow(color: Get.theme.focusColor.withOpacity(0.2), blurRadius: 10, offset: Offset(0, 5)),
+                        BoxShadow(
+                            color: Get.theme.focusColor.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: Offset(0, 5)),
                       ],
                     ),
                     margin: EdgeInsets.only(bottom: 50),
@@ -52,12 +57,14 @@ class ForgotPasswordView extends GetView<AuthController> {
                         children: [
                           Text(
                             _settings.appName,
-                            style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor, fontSize: 24)),
+                            style: Get.textTheme.headline6.merge(TextStyle(
+                                color: Get.theme.primaryColor, fontSize: 24)),
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Welcome to the best service provider system!".tr,
-                            style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor)),
+                            style: Get.textTheme.caption.merge(
+                                TextStyle(color: Get.theme.primaryColor)),
                             textAlign: TextAlign.center,
                           ),
                           // Text("Fill the following credentials to login your account", style: Get.textTheme.caption.merge(TextStyle(color: Get.theme.primaryColor))),
@@ -68,7 +75,8 @@ class ForgotPasswordView extends GetView<AuthController> {
                   Container(
                     decoration: Ui.getBoxDecoration(
                       radius: 14,
-                      border: Border.all(width: 5, color: Get.theme.primaryColor),
+                      border:
+                          Border.all(width: 5, color: Get.theme.primaryColor),
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -93,8 +101,11 @@ class ForgotPasswordView extends GetView<AuthController> {
                         labelText: "Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
                         initialValue: controller.currentUser?.value?.email,
-                        onSaved: (input) => controller.currentUser.value.email = input,
-                        validator: (input) => !GetUtils.isEmail(input) ? "Should be a valid email".tr : null,
+                        onSaved: (input) =>
+                            controller.currentUser.value.email = input,
+                        validator: (input) => !GetUtils.isEmail(input)
+                            ? "Should be a valid email".tr
+                            : null,
                         iconData: Icons.alternate_email,
                       ),
                       BlockButtonWidget(
@@ -102,7 +113,8 @@ class ForgotPasswordView extends GetView<AuthController> {
                         color: Get.theme.colorScheme.secondary,
                         text: Text(
                           "Send Reset Link".tr,
-                          style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.primaryColor)),
+                          style: Get.textTheme.headline6
+                              .merge(TextStyle(color: Get.theme.primaryColor)),
                         ),
                       ).paddingSymmetric(vertical: 35, horizontal: 20),
                       Row(

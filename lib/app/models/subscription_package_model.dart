@@ -8,7 +8,13 @@ class SubscriptionPackage extends Model {
   double discountPrice;
   int durationInDays;
 
-  SubscriptionPackage({this.id, this.name, this.description, this.price, this.discountPrice, this.durationInDays});
+  SubscriptionPackage(
+      {this.id,
+      this.name,
+      this.description,
+      this.price,
+      this.discountPrice,
+      this.durationInDays});
 
   SubscriptionPackage.fromJson(Map<String, dynamic> json) {
     super.fromJson(json);

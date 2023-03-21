@@ -29,7 +29,8 @@ class ReviewsView extends GetView<ReviewsController> {
               iconTheme: IconThemeData(color: Get.theme.hintColor),
               title: Text(
                 "Reviews".tr,
-                style: Get.textTheme.headline6.merge(TextStyle(color: Get.theme.hintColor)),
+                style: Get.textTheme.headline6
+                    .merge(TextStyle(color: Get.theme.hintColor)),
               ),
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -45,24 +46,34 @@ class ReviewsView extends GetView<ReviewsController> {
                     padding: EdgeInsets.only(top: 75),
                     decoration: new BoxDecoration(
                       gradient: new LinearGradient(
-                          colors: [Get.theme.colorScheme.secondary.withOpacity(1), Get.theme.scaffoldBackgroundColor],
+                          colors: [
+                            Get.theme.colorScheme.secondary.withOpacity(1),
+                            Get.theme.scaffoldBackgroundColor
+                          ],
                           begin: AlignmentDirectional.topCenter,
                           //const FractionalOffset(1, 0),
                           end: AlignmentDirectional.bottomCenter,
                           stops: [0.1, 0.7],
                           tileMode: TileMode.clamp),
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5)),
                     ),
                     child: Obx(() {
                       return Column(
                         children: [
                           Text(controller.rate.value.toStringAsFixed(2),
-                              style: Get.textTheme.headline1.merge(TextStyle(color: Get.theme.hintColor, fontSize: 36, fontWeight: FontWeight.w600))),
+                              style: Get.textTheme.headline1.merge(TextStyle(
+                                  color: Get.theme.hintColor,
+                                  fontSize: 36,
+                                  fontWeight: FontWeight.w600))),
                           Wrap(
-                            children: Ui.getStarsList(controller.rate.value, size: 32),
+                            children: Ui.getStarsList(controller.rate.value,
+                                size: 32),
                           ),
                           Text(
-                            "Total Reviews (%s)".trArgs([controller.totalReviews.value.toString()]),
+                            "Total Reviews (%s)".trArgs(
+                                [controller.totalReviews.value.toString()]),
                             style: Get.textTheme.caption,
                           ).paddingOnly(top: 5),
                         ],
@@ -78,7 +89,8 @@ class ReviewsView extends GetView<ReviewsController> {
                 return ListView.builder(
                   padding: EdgeInsets.all(0),
                   itemBuilder: (context, index) {
-                    return ReviewItemWidget(review: controller.reviews.elementAt(index));
+                    return ReviewItemWidget(
+                        review: controller.reviews.elementAt(index));
                   },
                   itemCount: controller.reviews.length,
                   primary: false,

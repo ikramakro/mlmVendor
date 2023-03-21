@@ -20,10 +20,13 @@ class BookingsEmptyListWidget extends StatelessWidget {
               height: 130,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                    Colors.grey.withOpacity(0.6),
-                    Colors.grey.withOpacity(0.2),
-                  ])),
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Colors.grey.withOpacity(0.6),
+                        Colors.grey.withOpacity(0.2),
+                      ])),
               child: Icon(
                 Icons.assignment_outlined,
                 color: Theme.of(context).scaffoldBackgroundColor,
@@ -37,7 +40,9 @@ class BookingsEmptyListWidget extends StatelessWidget {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                  color: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.15),
                   borderRadius: BorderRadius.circular(150),
                 ),
               ),
@@ -49,7 +54,9 @@ class BookingsEmptyListWidget extends StatelessWidget {
                 width: 120,
                 height: 120,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.15),
+                  color: Theme.of(context)
+                      .scaffoldBackgroundColor
+                      .withOpacity(0.15),
                   borderRadius: BorderRadius.circular(150),
                 ),
               ),

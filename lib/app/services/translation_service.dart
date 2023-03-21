@@ -31,7 +31,8 @@ class TranslationService extends GetxService {
 
   Future<void> loadTranslation({locale}) async {
     locale = locale ?? getLocale().toString();
-    Map<String, String> _translations = await _settingsRepo.getTranslations(locale);
+    Map<String, String> _translations =
+        await _settingsRepo.getTranslations(locale);
     Get.addTranslations({locale: _translations});
     Get.find<LaravelApiClient>().setLocale(locale);
   }
@@ -55,7 +56,8 @@ class TranslationService extends GetxService {
   Locale fromStringToLocale(String _locale) {
     if (_locale.contains('_')) {
       // en_US
-      return Locale(_locale.split('_').elementAt(0), _locale.split('_').elementAt(1));
+      return Locale(
+          _locale.split('_').elementAt(0), _locale.split('_').elementAt(1));
     } else {
       // en
       return Locale(_locale);

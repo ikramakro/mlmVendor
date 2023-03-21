@@ -40,12 +40,14 @@ class ThemeModeController extends GetxController {
     if (themeMode == ThemeMode.dark) {
       //Get.rootController.setTheme(Get.find<SettingsService>().getDarkTheme());
       SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle.dark.copyWith(systemNavigationBarColor: Colors.black87),
+        SystemUiOverlayStyle.dark
+            .copyWith(systemNavigationBarColor: Colors.black87),
       );
     } else {
       //Get.rootController.setTheme(Get.find<SettingsService>().getLightTheme());
       SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: Colors.white),
+        SystemUiOverlayStyle.light
+            .copyWith(systemNavigationBarColor: Colors.white),
       );
     }
     _box.write('theme_mode', themeMode.toString());

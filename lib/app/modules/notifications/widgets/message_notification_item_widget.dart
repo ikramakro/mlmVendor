@@ -24,7 +24,9 @@ class MessageNotificationItemWidget extends GetView<NotificationsController> {
         size: 34,
       ),
       onTap: (notification) async {
-        Get.toNamed(Routes.CHAT, arguments: new Message([], id: notification.data['message_id'].toString()));
+        Get.toNamed(Routes.CHAT,
+            arguments: new Message([],
+                id: notification.data['message_id'].toString()));
         await controller.markAsReadNotification(notification);
       },
     );

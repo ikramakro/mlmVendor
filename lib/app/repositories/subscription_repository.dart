@@ -15,12 +15,15 @@ class SubscriptionRepository {
     return _laravelApiClient.getSubscriptionPackages();
   }
 
-  Future<EProviderSubscription> cashEProviderSubscription(eProviderSubscription) {
+  Future<EProviderSubscription> cashEProviderSubscription(
+      eProviderSubscription) {
     return _laravelApiClient.cashEProviderSubscription(eProviderSubscription);
   }
 
-  Future<EProviderSubscription> walletEProviderSubscription(eProviderSubscription, wallet) {
-    return _laravelApiClient.walletEProviderSubscription(eProviderSubscription, wallet);
+  Future<EProviderSubscription> walletEProviderSubscription(
+      eProviderSubscription, wallet) {
+    return _laravelApiClient.walletEProviderSubscription(
+        eProviderSubscription, wallet);
   }
 
   Future<List<EProviderSubscription>> getEProviderSubscriptions() {

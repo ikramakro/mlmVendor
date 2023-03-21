@@ -44,7 +44,8 @@ class StripeViewWidget extends GetView<StripeController> {
               return SizedBox(
                 height: 3,
                 child: LinearProgressIndicator(
-                  backgroundColor: Get.theme.colorScheme.secondary.withOpacity(0.2),
+                  backgroundColor:
+                      Get.theme.colorScheme.secondary.withOpacity(0.2),
                 ),
               );
             } else {

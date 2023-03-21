@@ -14,7 +14,9 @@ class WalletFormView extends GetView<WalletFormController> {
         appBar: AppBar(
           title: Obx(() {
             return Text(
-              controller.isCreateForm() ? "Add New Wallet".tr : controller.wallet.value.name,
+              controller.isCreateForm()
+                  ? "Add New Wallet".tr
+                  : controller.wallet.value.name,
               style: context.textTheme.headline6,
             );
           }),
@@ -36,7 +38,8 @@ class WalletFormView extends GetView<WalletFormController> {
                 ),
                 onPressed: () {
                   if (controller.wallet.value.balance > 0) {
-                    Get.showSnackbar(Ui.ErrorSnackBar(message: "You can't delete non empty wallet".tr));
+                    Get.showSnackbar(Ui.ErrorSnackBar(
+                        message: "You can't delete non empty wallet".tr));
                   } else {
                     _showDeleteDialog(context);
                   }
@@ -49,9 +52,13 @@ class WalletFormView extends GetView<WalletFormController> {
           padding: EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             color: Get.theme.primaryColor,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             boxShadow: [
-              BoxShadow(color: Get.theme.focusColor.withOpacity(0.1), blurRadius: 10, offset: Offset(0, -5)),
+              BoxShadow(
+                  color: Get.theme.focusColor.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: Offset(0, -5)),
             ],
           ),
           child: Row(
@@ -66,9 +73,12 @@ class WalletFormView extends GetView<WalletFormController> {
                     }
                   },
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   color: Get.theme.colorScheme.secondary,
-                  child: Text("Save".tr, style: Get.textTheme.bodyText2.merge(TextStyle(color: Get.theme.primaryColor))),
+                  child: Text("Save".tr,
+                      style: Get.textTheme.bodyText2
+                          .merge(TextStyle(color: Get.theme.primaryColor))),
                   elevation: 0,
                   hoverElevation: 0,
                   focusElevation: 0,
@@ -84,8 +94,11 @@ class WalletFormView extends GetView<WalletFormController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Wallet".tr, style: Get.textTheme.headline5).paddingOnly(top: 25, bottom: 0, right: 22, left: 22),
-                Text("Fill the following details to add new wallet".tr, style: Get.textTheme.caption).paddingSymmetric(horizontal: 22, vertical: 5),
+                Text("Wallet".tr, style: Get.textTheme.headline5)
+                    .paddingOnly(top: 25, bottom: 0, right: 22, left: 22),
+                Text("Fill the following details to add new wallet".tr,
+                        style: Get.textTheme.caption)
+                    .paddingSymmetric(horizontal: 22, vertical: 5),
                 TextFieldWidget(
                   onSaved: (input) {
                     controller.wallet.update((val) {
@@ -94,7 +107,8 @@ class WalletFormView extends GetView<WalletFormController> {
                     print(controller.wallet.value);
                     return controller.wallet.value.name = input;
                   },
-                  validator: (input) => input.length < 1 ? "Field is required".tr : null,
+                  validator: (input) =>
+                      input.length < 1 ? "Field is required".tr : null,
                   initialValue: controller.wallet.value.name,
                   hintText: "My Wallet".tr,
                   labelText: "Wallet Name".tr,
@@ -118,7 +132,8 @@ class WalletFormView extends GetView<WalletFormController> {
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Text("This wallet will removed from your account".tr, style: Get.textTheme.bodyText1),
+                Text("This wallet will removed from your account".tr,
+                    style: Get.textTheme.bodyText1),
               ],
             ),
           ),

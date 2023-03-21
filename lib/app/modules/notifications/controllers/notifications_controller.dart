@@ -23,7 +23,8 @@ class NotificationsController extends GetxController {
     await getNotifications();
     Get.find<RootController>().getNotificationsCount();
     if (showMessage == true) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "List of notifications refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(
+          message: "List of notifications refreshed successfully".tr));
     }
   }
 

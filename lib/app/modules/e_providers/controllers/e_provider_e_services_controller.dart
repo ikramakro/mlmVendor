@@ -26,7 +26,9 @@ class EProviderEServicesController extends GetxController {
   Future<void> onInit() async {
     eProvider.value = Get.arguments as EProvider;
     scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !isDone.value) {
+      if (scrollController.position.pixels ==
+              scrollController.position.maxScrollExtent &&
+          !isDone.value) {
         loadEServicesOfCategory(filter: selected.value);
       }
     });
@@ -43,7 +45,8 @@ class EProviderEServicesController extends GetxController {
     toggleSelected(selected.value);
     await loadEServicesOfCategory(filter: selected.value);
     if (showMessage == true) {
-      Get.showSnackbar(Ui.SuccessSnackBar(message: "List of services refreshed successfully".tr));
+      Get.showSnackbar(Ui.SuccessSnackBar(
+          message: "List of services refreshed successfully".tr));
     }
   }
 
@@ -67,22 +70,28 @@ class EProviderEServicesController extends GetxController {
       List<EService> _eServices = [];
       switch (filter) {
         case CategoryFilter.ALL:
-          _eServices = await _eProviderRepository.getEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
           break;
         case CategoryFilter.FEATURED:
-          _eServices = await _eProviderRepository.getFeaturedEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getFeaturedEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
           break;
         case CategoryFilter.POPULAR:
-          _eServices = await _eProviderRepository.getPopularEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getPopularEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
           break;
         case CategoryFilter.RATING:
-          _eServices = await _eProviderRepository.getMostRatedEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getMostRatedEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
           break;
         case CategoryFilter.AVAILABILITY:
-          _eServices = await _eProviderRepository.getAvailableEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getAvailableEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
           break;
         default:
-          _eServices = await _eProviderRepository.getEServices(eProviderId: eProvider.value.id, page: this.page.value);
+          _eServices = await _eProviderRepository.getEServices(
+              eProviderId: eProvider.value.id, page: this.page.value);
       }
       if (_eServices.isNotEmpty) {
         this.eServices.addAll(_eServices);

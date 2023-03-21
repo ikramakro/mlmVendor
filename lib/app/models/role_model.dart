@@ -24,8 +24,15 @@ class Role extends Model {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || super == other && other is Role && runtimeType == other.runtimeType && id == other.id && name == other.name && isdDefault == other.isdDefault;
+      identical(this, other) ||
+      super == other &&
+          other is Role &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          isdDefault == other.isdDefault;
 
   @override
-  int get hashCode => super.hashCode ^ id.hashCode ^ name.hashCode ^ isdDefault.hashCode;
+  int get hashCode =>
+      super.hashCode ^ id.hashCode ^ name.hashCode ^ isdDefault.hashCode;
 }

@@ -54,7 +54,8 @@ class WalletFormController extends GetxController {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       } finally {}
     } else {
-      Get.showSnackbar(Ui.ErrorSnackBar(message: "There are errors in some fields please correct them!".tr));
+      Get.showSnackbar(Ui.ErrorSnackBar(
+          message: "There are errors in some fields please correct them!".tr));
     }
   }
 
@@ -69,7 +70,8 @@ class WalletFormController extends GetxController {
         Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
       } finally {}
     } else {
-      Get.showSnackbar(Ui.ErrorSnackBar(message: "There are errors in some fields please correct them!".tr));
+      Get.showSnackbar(Ui.ErrorSnackBar(
+          message: "There are errors in some fields please correct them!".tr));
     }
   }
 

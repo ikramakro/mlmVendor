@@ -26,7 +26,8 @@ class LanguageView extends GetView<LanguageController> {
                 backgroundColor: Colors.transparent,
                 automaticallyImplyLeading: false,
                 leading: new IconButton(
-                  icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
+                  icon: new Icon(Icons.arrow_back_ios,
+                      color: Get.theme.hintColor),
                   onPressed: () => Get.back(),
                 ),
                 elevation: 0,
@@ -35,7 +36,8 @@ class LanguageView extends GetView<LanguageController> {
           primary: true,
           children: [
             Obx(() {
-              if (Get.find<LaravelApiClient>().isLoading(task: 'getTranslations')) {
+              if (Get.find<LaravelApiClient>()
+                  .isLoading(task: 'getTranslations')) {
                 return LanguagesLoaderWidget();
               }
               return Container(
@@ -43,7 +45,8 @@ class LanguageView extends GetView<LanguageController> {
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: Ui.getBoxDecoration(),
                 child: Column(
-                  children: List.generate(TranslationService.languages.length, (index) {
+                  children: List.generate(TranslationService.languages.length,
+                      (index) {
                     var _lang = TranslationService.languages.elementAt(index);
                     return RadioListTile(
                       value: _lang,
