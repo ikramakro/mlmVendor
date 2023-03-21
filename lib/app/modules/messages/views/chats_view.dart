@@ -66,8 +66,8 @@ class ChatsView extends GetView<MessagesController> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        elevation: 1,
         centerTitle: true,
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios, color: Get.theme.hintColor),
@@ -80,7 +80,7 @@ class ChatsView extends GetView<MessagesController> {
         automaticallyImplyLeading: false,
         title: Obx(() {
           return Text(
-            controller.message.value.name,
+            controller.getUsernam(),
             overflow: TextOverflow.fade,
             maxLines: 1,
             style: Get.textTheme.headline6.merge(TextStyle(letterSpacing: 1.3)),

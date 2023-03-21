@@ -12,6 +12,7 @@ import '../../../models/user_model.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../repositories/notification_repository.dart';
 import '../../../services/auth_service.dart';
+import '../../bookings/controllers/booking_controller.dart';
 
 class MessagesController extends GetxController {
   final uploading = false.obs;
@@ -147,5 +148,10 @@ class MessagesController extends GetxController {
       Get.showSnackbar(
           Ui.ErrorSnackBar(message: "Please select an image file".tr));
     }
+  }
+
+  String getUsernam() {
+    String username = Get.find<BookingController>().booking.value.user.name;
+    return username;
   }
 }

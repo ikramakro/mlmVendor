@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:url_launcher/url_launcher_string.dart';
@@ -237,15 +238,18 @@ class BookingView extends GetView<BookingController> {
                                   child: ClipRRect(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
-                                    child: CachedNetworkImage(
-                                      width: 250,
-                                      fit: BoxFit.contain,
-                                      imageUrl:
-                                          controller.booking.value.booking_img,
-                                      placeholder: (context, url) =>
-                                          CircularLoadingWidget(height: 200),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error_outline),
+                                    child: FullScreenWidget(
+                                      disposeLevel: DisposeLevel.Low,
+                                      child: CachedNetworkImage(
+                                        width: 250,
+                                        fit: BoxFit.contain,
+                                        imageUrl: controller
+                                            .booking.value.booking_img,
+                                        placeholder: (context, url) =>
+                                            CircularLoadingWidget(height: 200),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error_outline),
+                                      ),
                                     ),
                                   ).marginSymmetric(horizontal: 20),
                                 );
