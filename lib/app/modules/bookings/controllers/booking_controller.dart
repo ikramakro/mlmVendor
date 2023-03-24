@@ -46,6 +46,7 @@ class BookingController extends GetxController {
   final ChargesName = "".obs;
   final ChargesPrice = "".obs;
   GlobalKey<FormState> ChargeForm = new GlobalKey<FormState>();
+  DateTime picked = null;
 
   BookingController() {
     _bookingRepository = BookingRepository();
@@ -65,8 +66,8 @@ class BookingController extends GetxController {
     super.onReady();
   }
 
-  Future<Null> showMyDatePicker(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+  Future<DateTime> showMyDatePicker(BuildContext context) async {
+    picked = await showDatePicker(
       context: context,
       initialDate: booking.value.bookingAt,
       firstDate: DateTime(2000),
@@ -84,23 +85,38 @@ class BookingController extends GetxController {
       },
     );
     if (picked != null) {
+      Get.log(" After String $InitialDate");
       InitialDate.value = DateTime(picked.year, picked.month, picked.day);
+      Get.log("Before  String $InitialDate");
       String date = DateTime(picked.year, picked.month, picked.day).toString();
+
       var dateTime = DateTime.parse(date);
-      DateTime Datex = DateTime(picked.year, picked.month, picked.day);
+
       var format = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
+      Get.log(" Date String $format");
       Date.value = format;
       // booking.update((val) {
       //   val.bookingAt = Datex;
       // });
-      print("pick date is${format}");
+      Get.log("pick date is${format}");
 
-      booking.update((val) {
-        val.bookingAt = DateTime(picked.year, picked.month, picked.day,
-            val.bookingAt.hour, val.bookingAt.minute);
-      });
-      DateInBooking(booking.value.bookingAt);
+      // booking.update((val) {
+      //   val.bookingAt = DateTime(picked.year, picked.month, picked.day,
+      //       val.bookingAt.hour, val.bookingAt.minute);
+      // });
+      // DateInBooking(booking.value.bookingAt);
+      return picked;
+    } else {
+      return picked = null;
     }
+  }
+
+  void updateBookingDate() {
+    booking.update((val) {
+      val.bookingAt = DateTime(picked.year, picked.month, picked.day,
+          val.bookingAt.hour, val.bookingAt.minute);
+    });
+    DateInBooking(booking.value.bookingAt);
   }
 
   Future<void> DateInBooking(DateTime bookingDate) async {

@@ -271,7 +271,9 @@ class BookingView extends GetView<BookingController> {
                                   ? MaterialButton(
                                       elevation: 0,
                                       onPressed: () {
-                                        controller.showMyDatePicker(context);
+                                        _showMyDialog(
+                                          context,
+                                        );
                                       },
                                       padding: EdgeInsets.symmetric(
                                           horizontal: 25, vertical: 12),
@@ -335,242 +337,224 @@ class BookingView extends GetView<BookingController> {
                                           textAlign: TextAlign.end,
                                         )),
                                   ),
+                                Obx(() {
+                                  if (controller.booking.value.eService == null)
+                                    return SizedBox();
+                                  else
+                                    return Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Divider(
+                                          thickness: 2,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text("Pricing".tr,
+                                            style: Get.textTheme.subtitle2),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        BookingRowWidget(
+                                            descriptionFlex: 2,
+                                            valueFlex: 1,
+                                            description: controller
+                                                .booking.value.eService.name,
+                                            child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Ui.getPrice(
+                                                  controller.booking.value
+                                                      .eService.getPrice,
+                                                  style:
+                                                      Get.textTheme.subtitle2),
+                                            ),
+                                            hasDivider: true),
+                                        Column(
+                                          children: List.generate(
+                                              controller.booking.value.options
+                                                  .length, (index) {
+                                            var _option = controller
+                                                .booking.value.options
+                                                .elementAt(index);
+                                            return BookingRowWidget(
+                                                descriptionFlex: 2,
+                                                valueFlex: 1,
+                                                description: _option.name,
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Ui.getPrice(
+                                                      _option.price,
+                                                      style: Get
+                                                          .textTheme.bodyText1),
+                                                ),
+                                                hasDivider: (controller
+                                                            .booking
+                                                            .value
+                                                            .options
+                                                            .length -
+                                                        1) ==
+                                                    index);
+                                          }),
+                                        ),
+                                        if (controller.booking.value.eService
+                                                .priceUnit ==
+                                            'fixed')
+                                          BookingRowWidget(
+                                              description: "Quantity".tr,
+                                              child: Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Text(
+                                                  "x" +
+                                                      controller.booking.value
+                                                          .quantity
+                                                          .toString() +
+                                                      " " +
+                                                      controller
+                                                          .booking
+                                                          .value
+                                                          .eService
+                                                          .quantityUnit
+                                                          .tr,
+                                                  style:
+                                                      Get.textTheme.bodyText2,
+                                                ),
+                                              ),
+                                              hasDivider: true),
+                                        // Column(
+                                        //   children: List.generate(
+                                        //       controller.booking.value.taxes.length,
+                                        //       (index) {
+                                        //     var _tax = controller.booking.value.taxes
+                                        //         .elementAt(index);
+                                        //     return BookingRowWidget(
+                                        //         description: _tax.name,
+                                        //         child: Align(
+                                        //           alignment: Alignment.centerRight,
+                                        //           child: _tax.type == 'percent'
+                                        //               ? Text(_tax.value.toString() + '%',
+                                        //                   style: Get.textTheme.bodyText1)
+                                        //               : Ui.getPrice(
+                                        //                   _tax.value,
+                                        //                   style: Get.textTheme.bodyText1,
+                                        //                 ),
+                                        //         ),
+                                        //         hasDivider: (controller
+                                        //                     .booking.value.taxes.length -
+                                        //                 1) ==
+                                        //             index);
+                                        //   }),
+                                        // ),
+                                        // Obx(() {
+                                        //   return BookingRowWidget(
+                                        //     description: "Tax Amount".tr,
+                                        //     child: Align(
+                                        //       alignment: Alignment.centerRight,
+                                        //       child: Ui.getPrice(
+                                        //           controller.booking.value
+                                        //               .getTaxesValue(),
+                                        //           style: Get.textTheme.subtitle2),
+                                        //     ),
+                                        //     hasDivider: false,
+                                        //   );
+                                        // }),
+                                        // if (controller.booking.value.extra?.isNotEmpty)
+                                        //   Container(
+                                        //     height: controller.ChargeSize(),
+                                        //     child: ListView.builder(
+                                        //         scrollDirection: Axis.vertical,
+                                        //         itemCount:
+                                        //             controller.booking.value.extra.length,
+                                        //         itemBuilder: (context, index) {
+                                        //           return Obx(() {
+                                        //             return Column(
+                                        //               children: [
+                                        //                 BookingRowWidget(
+                                        //                   description: controller.booking
+                                        //                       .value.extra[index].name,
+                                        //                   child: Align(
+                                        //                     alignment:
+                                        //                         Alignment.centerRight,
+                                        //                     child: Ui.getPrice(
+                                        //                         controller.booking.value
+                                        //                             .extra[index].price
+                                        //                             .toDouble(),
+                                        //                         style: Get
+                                        //                             .textTheme.subtitle2),
+                                        //                   ),
+                                        //                 ),
+                                        //                 SizedBox(
+                                        //                   height: 5,
+                                        //                 )
+                                        //               ],
+                                        //             );
+                                        //           });
+                                        //         }),
+                                        //   ),
+                                        // Obx(() {
+                                        //   return BookingRowWidget(
+                                        //       description: "Subtotal".tr,
+                                        //       child: Align(
+                                        //         alignment: Alignment.centerRight,
+                                        //         child: Ui.getPrice(
+                                        //             controller.booking.value
+                                        //                 .getSubtotal(),
+                                        //             style: Get.textTheme.subtitle2),
+                                        //       ),
+                                        //       hasDivider: true);
+                                        // }),
+                                        // if ((controller.booking.value.coupon?.discount ??
+                                        //         0) >
+                                        //     0)
+                                        //   BookingRowWidget(
+                                        //       description: "Coupon".tr,
+                                        //       child: Align(
+                                        //         alignment: Alignment.centerRight,
+                                        //         child: Wrap(
+                                        //           children: [
+                                        //             Text(' - ',
+                                        //                 style: Get.textTheme.bodyText1),
+                                        //             Ui.getPrice(
+                                        //                 controller.booking.value.coupon
+                                        //                     .discount,
+                                        //                 style: Get.textTheme.bodyText1,
+                                        //                 unit: controller
+                                        //                             .booking
+                                        //                             .value
+                                        //                             .coupon
+                                        //                             .discountType ==
+                                        //                         'percent'
+                                        //                     ? "%"
+                                        //                     : null),
+                                        //           ],
+                                        //         ),
+                                        //       ),
+                                        //       hasDivider: true),
+                                        Obx(() {
+                                          return BookingRowWidget(
+                                            description: "Total Amount".tr,
+                                            child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Ui.getPrice(
+                                                  controller.booking.value
+                                                      .getTotal(),
+                                                  style:
+                                                      Get.textTheme.headline6),
+                                            ),
+                                          );
+                                        })
+                                      ],
+                                    );
+                                })
                               ],
                             );
                           }),
                         );
                     }),
-                    Obx(() {
-                      if (controller.booking.value.eService == null)
-                        return SizedBox();
-                      else
-                        return BookingTilWidget(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Pricing".tr,
-                                  style: Get.textTheme.subtitle2),
-                              Obx(
-                                () => (!controller.booking.value.cancel)
-                                    ? MaterialButton(
-                                        elevation: 0,
-                                        onPressed: () {
-                                          _showMyDialog(
-                                            context,
-                                          );
-                                          // controller.showMyDatePicker(context);
-                                        },
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 25, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        color: Get.theme.hintColor
-                                            .withOpacity(0.1),
-                                        child: Text("Edit".tr,
-                                            style: Get.textTheme.bodyText2),
-                                      )
-                                    : SizedBox(),
-                              ),
-                            ],
-                          ),
-                          content: Column(
-                            children: [
-                              BookingRowWidget(
-                                  descriptionFlex: 2,
-                                  valueFlex: 1,
-                                  description:
-                                      controller.booking.value.eService.name,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Ui.getPrice(
-                                        controller
-                                            .booking.value.eService.getPrice,
-                                        style: Get.textTheme.subtitle2),
-                                  ),
-                                  hasDivider: true),
-                              Column(
-                                children: List.generate(
-                                    controller.booking.value.options.length,
-                                    (index) {
-                                  var _option = controller.booking.value.options
-                                      .elementAt(index);
-                                  return BookingRowWidget(
-                                      descriptionFlex: 2,
-                                      valueFlex: 1,
-                                      description: _option.name,
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Ui.getPrice(_option.price,
-                                            style: Get.textTheme.bodyText1),
-                                      ),
-                                      hasDivider: (controller.booking.value
-                                                  .options.length -
-                                              1) ==
-                                          index);
-                                }),
-                              ),
-                              if (controller.booking.value.eService.priceUnit ==
-                                  'fixed')
-                                BookingRowWidget(
-                                    description: "Quantity".tr,
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        "x" +
-                                            controller.booking.value.quantity
-                                                .toString() +
-                                            " " +
-                                            controller.booking.value.eService
-                                                .quantityUnit.tr,
-                                        style: Get.textTheme.bodyText2,
-                                      ),
-                                    ),
-                                    hasDivider: true),
-                              // Column(
-                              //   children: List.generate(
-                              //       controller.booking.value.taxes.length,
-                              //       (index) {
-                              //     var _tax = controller.booking.value.taxes
-                              //         .elementAt(index);
-                              //     return BookingRowWidget(
-                              //         description: _tax.name,
-                              //         child: Align(
-                              //           alignment: Alignment.centerRight,
-                              //           child: _tax.type == 'percent'
-                              //               ? Text(_tax.value.toString() + '%',
-                              //                   style: Get.textTheme.bodyText1)
-                              //               : Ui.getPrice(
-                              //                   _tax.value,
-                              //                   style: Get.textTheme.bodyText1,
-                              //                 ),
-                              //         ),
-                              //         hasDivider: (controller
-                              //                     .booking.value.taxes.length -
-                              //                 1) ==
-                              //             index);
-                              //   }),
-                              // ),
-                              // Obx(() {
-                              //   return BookingRowWidget(
-                              //     description: "Tax Amount".tr,
-                              //     child: Align(
-                              //       alignment: Alignment.centerRight,
-                              //       child: Ui.getPrice(
-                              //           controller.booking.value
-                              //               .getTaxesValue(),
-                              //           style: Get.textTheme.subtitle2),
-                              //     ),
-                              //     hasDivider: false,
-                              //   );
-                              // }),
-                              // if (controller.booking.value.extra?.isNotEmpty)
-                              //   Container(
-                              //     height: controller.ChargeSize(),
-                              //     child: ListView.builder(
-                              //         scrollDirection: Axis.vertical,
-                              //         itemCount:
-                              //             controller.booking.value.extra.length,
-                              //         itemBuilder: (context, index) {
-                              //           return Obx(() {
-                              //             return Column(
-                              //               children: [
-                              //                 BookingRowWidget(
-                              //                   description: controller.booking
-                              //                       .value.extra[index].name,
-                              //                   child: Align(
-                              //                     alignment:
-                              //                         Alignment.centerRight,
-                              //                     child: Ui.getPrice(
-                              //                         controller.booking.value
-                              //                             .extra[index].price
-                              //                             .toDouble(),
-                              //                         style: Get
-                              //                             .textTheme.subtitle2),
-                              //                   ),
-                              //                 ),
-                              //                 SizedBox(
-                              //                   height: 5,
-                              //                 )
-                              //               ],
-                              //             );
-                              //           });
-                              //         }),
-                              //   ),
-                              // Obx(() {
-                              //   return BookingRowWidget(
-                              //       description: "Subtotal".tr,
-                              //       child: Align(
-                              //         alignment: Alignment.centerRight,
-                              //         child: Ui.getPrice(
-                              //             controller.booking.value
-                              //                 .getSubtotal(),
-                              //             style: Get.textTheme.subtitle2),
-                              //       ),
-                              //       hasDivider: true);
-                              // }),
-                              // if ((controller.booking.value.coupon?.discount ??
-                              //         0) >
-                              //     0)
-                              //   BookingRowWidget(
-                              //       description: "Coupon".tr,
-                              //       child: Align(
-                              //         alignment: Alignment.centerRight,
-                              //         child: Wrap(
-                              //           children: [
-                              //             Text(' - ',
-                              //                 style: Get.textTheme.bodyText1),
-                              //             Ui.getPrice(
-                              //                 controller.booking.value.coupon
-                              //                     .discount,
-                              //                 style: Get.textTheme.bodyText1,
-                              //                 unit: controller
-                              //                             .booking
-                              //                             .value
-                              //                             .coupon
-                              //                             .discountType ==
-                              //                         'percent'
-                              //                     ? "%"
-                              //                     : null),
-                              //           ],
-                              //         ),
-                              //       ),
-                              //       hasDivider: true),
-                              Obx(() {
-                                return BookingRowWidget(
-                                  description: "Total Amount".tr,
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Ui.getPrice(
-                                        controller.booking.value.getTotal(),
-                                        style: Get.textTheme.headline6),
-                                  ),
-                                );
-                              }),
-                              // Row(
-                              //   mainAxisAlignment: MainAxisAlignment.center,
-                              //   children: [
-                              //     MaterialButton(
-                              //       elevation: 0,
-                              //       onPressed: () {
-                              //         _showMyDialog(context);
-                              //         // Get.toNamed(Routes.ReferenceImage);
-                              //       },
-                              //       padding: EdgeInsets.symmetric(
-                              //           horizontal: 25, vertical: 12),
-                              //       shape: RoundedRectangleBorder(
-                              //           borderRadius:
-                              //               BorderRadius.circular(10)),
-                              //       color: Get.theme.hintColor.withOpacity(0.1),
-                              //       child: Text("Add Charges".tr,
-                              //           style: Get.textTheme.bodyText2),
-                              //     ),
-                              //   ],
-                              // )
-                            ],
-                          ),
-                        );
-                    })
                   ],
                 ),
               ),
@@ -582,56 +566,126 @@ class BookingView extends GetView<BookingController> {
   Future<void> _showMyDialog(
     BuildContext context,
   ) async {
+    bool isOpen = false;
     return showDialog(
         context: context,
-        builder: (_) => new AlertDialog(
-              title: const Text('Edit Price'),
+        builder: (_) => new Dialog(
+              child: SizedBox(
+                height: 280,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    const Text('Edit Price & Date '),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Text('Booking Date')),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          controller.picked.toString()
+                          // DateFormat('d, MMMM y ', Get.locale.toString())
+                          //     .format(controller.booking.value.bookingAt),
+                          ,
+                          style: Get.textTheme.caption,
+                          textAlign: TextAlign.start,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              controller.showMyDatePicker(context);
+                              isOpen = true;
+                            },
+                            icon: Icon(
+                              Icons.edit,
+                            ))
+                      ],
+                    ),
+                    Form(
+                      key: controller.ChargeForm,
+                      child: Container(
+                        height: 60,
+                        child: Container(
+                          child: NumTextFieldWidget(
+                            keyboardType: TextInputType.phone,
+                            // controller: priceController,
+                            validator: (input) => input.length < 2
+                                ? "Should be more than 3 letters".tr
+                                : null,
+                            onSaved: (input) =>
+                                controller.bookingExtraString.value = input,
+                            // initialValue: "",
+                            // hintText: "Price".tr,
+                            // labelText: "Price".tr,
+                            hintText: 'Prices'.tr,
+                            // iconData: Icons.person_outline,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        TextButton(
+                          child: const Text('Save'),
+                          onPressed: () {
+                            if (isOpen &&
+                                !controller.ChargeForm.currentState
+                                    .validate()) {
+                              controller.updateBookingDate();
+                              isOpen = false;
+                              Navigator.of(context).pop();
+                              Get.log('Date is run ');
+                              Get.log('picked value${controller.picked}');
+                            }
+                            // if (!controller.ChargeForm.currentState
+                            //     .validate()) {
+                            //   controller.ChargeForm.currentState.save();
+                            //   controller.ExtraInBooking();
+                            //   Navigator.of(context).pop();
+                            // }
+
+                            // controller.ChargeForm.currentState.save();
+                            // controller.ExtraInBooking();
+                            // controller.updateBookingDate();
+
+                            // Navigator.of(context).pop();
+                            // controller.AddCharge();
+
+                            else if (!isOpen &&
+                                controller.ChargeForm.currentState.validate()) {
+                              controller.ChargeForm.currentState.save();
+                              controller.ExtraInBooking();
+                              Get.log('price is run ');
+                              // controller.AddCharge();
+                              Navigator.of(context).pop();
+                            } else {
+                              controller.ChargeForm.currentState.save();
+                              controller.ExtraInBooking();
+                              controller.updateBookingDate();
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ).paddingOnly(left: 15),
+              ),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              content: Builder(
-                builder: (context) {
-                  // Get available height and width of the build area of this widget. Make a choice depending on the size.
-                  var height = MediaQuery.of(context).size.height;
-                  var width = MediaQuery.of(context).size.width;
-
-                  return Form(
-                    key: controller.ChargeForm,
-                    child: Container(
-                      height: 100,
-                      width: 400,
-                      child: Container(
-                        width: 80,
-                        child: NumTextFieldWidget(
-                          keyboardType: TextInputType.phone,
-                          // controller: controller.priceController,
-                          validator: (input) => input.length < 2
-                              ? "Should be more than 3 letters".tr
-                              : null,
-                          onSaved: (input) =>
-                              controller.bookingExtraString.value = input,
-                          // initialValue: "",
-                          // hintText: "Price".tr,
-                          labelText: "Price".tr,
-                          // iconData: Icons.person_outline,
-                        ),
-                      ).paddingOnly(left: 8),
-                    ),
-                  );
-                },
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('save'),
-                  onPressed: () {
-                    if (controller.ChargeForm.currentState.validate()) {
-                      controller.ChargeForm.currentState.save();
-                      controller.ExtraInBooking();
-                      // controller.AddCharge();
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ],
             ));
   }
 
