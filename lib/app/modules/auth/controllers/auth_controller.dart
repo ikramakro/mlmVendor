@@ -125,7 +125,7 @@ class AuthController extends GetxController {
           await _userRepository.signInWithEmailAndPassword(
               currentUser.value.email, currentUser.value.apiToken);
           loading.value = false;
-          await Get.find<HomeController>().refreshHome();
+          // await Get.find<HomeController>().refreshHome();
           await Get.toNamed(Routes.ROOT, arguments: 0);
         } else {
           loginFormKey.currentState.reset();

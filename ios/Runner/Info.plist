@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -10,9 +12,51 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>comgooglemaps</string>
+        <string>baidumap</string>
+    	<string>iosamap</string>
+    	<string>waze</string>
+    	<string>yandexmaps</string>
+    	<string>yandexnavi</string>
+    	<string>citymapper</string>
+    	<string>mapswithme</string>
+    	<string>osmandmaps</string>
+    	<string>dgis</string>
+    	<string>qqmap</string>
+    	<string>here-location</string>
+    	<string>tomtomgo</string>
+    </array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>dev.flutter.background.refresh</string>
+    </array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app needs access to location when in the background.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open and in the background.</string>
 	<key>CFBundleName</key>
 	<string>home_services_provider</string>
 	<key>CFBundlePackageType</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Need to upload image</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Need to upload image</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need to upload image</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+	    <string>itms-beta</string>
+	    <string>itms</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>sms</string>
+        <string>tel</string>
+    </array>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
