@@ -11,6 +11,7 @@ import '../../../services/auth_service.dart';
 import '../../global_widgets/select_dialog.dart';
 
 class ProfileController extends GetxController {
+  final val = false.obs;
   var user = new User().obs;
   var avatar = new Media().obs;
   var portfolio = new Media().obs;

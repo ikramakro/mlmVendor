@@ -194,18 +194,18 @@ class BookingController extends GetxController {
   Future ExtraInBooking() async {
     print("this is runnning check this booking");
     // print("List ${priceController.text}");
-    print("$bookingExtra");
-    print("${booking.value.getSubtotal()}");
+    Get.log("$bookingExtra");
+    Get.log("${booking.value.getSubtotal()}");
     bookingExtra.value = double.parse(bookingExtraString.value);
     bookingExtra.value = bookingExtra.value - booking.value.getSubtotal();
-    print("extra is this ${bookingExtra.value}");
+    Get.log("extra is this ${bookingExtra.value}");
     try {
       final _booking = new Booking(
         extra: bookingExtra.value,
       );
-      print("check extra charges ${_booking.extra}");
+      Get.log("check extra charges ${_booking.extra}");
 
-      print("check this booking ${bookingExtra}");
+      Get.log("check this booking ${bookingExtra}");
       await _bookingRepository.updateExtra(_booking, booking.value.id);
       booking.update((val) {
         val.extra = bookingExtra.value;

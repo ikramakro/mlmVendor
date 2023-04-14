@@ -7,6 +7,7 @@ import '../../../models/review_model.dart';
 import '../../../repositories/e_service_repository.dart';
 
 class EServiceController extends GetxController {
+  final isExpanded = false.obs;
   final eService = EService().obs;
   final reviews = <Review>[].obs;
   final optionGroups = <OptionGroup>[].obs;

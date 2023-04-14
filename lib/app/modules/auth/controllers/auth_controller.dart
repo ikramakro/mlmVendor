@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ import '../../../services/firebase_messaging_service.dart';
 import '../../../services/settings_service.dart';
 import '../../global_widgets/select_dialog.dart';
 import '../../global_widgets/single_select_dialog.dart';
+import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
   final Rx<User> currentUser = Get.find<AuthService>().user;
@@ -29,7 +31,7 @@ class AuthController extends GetxController {
   GlobalKey<FormState> registerFormKey;
   GlobalKey<FormState> forgotPasswordFormKey;
   final hidePassword = true.obs;
-  final selectedCategory = <Category>[].obs;
+  final selectedCategory = <Category>[Category(id: '1')].obs;
   final selectedCategoryName = "".obs;
   final selectedCategoryId = "".obs;
   final loading = false.obs;
@@ -40,6 +42,7 @@ class AuthController extends GetxController {
   final SelectedCategoryName = "".obs;
   final SelectedCategoryId = "".obs;
   EProviderRepository _eProviderRepository;
+  final checkBoxValue = false.obs;
 
   AuthController() {
     _userRepository = UserRepository();
@@ -143,53 +146,70 @@ class AuthController extends GetxController {
     }
   }
 
+  // Future<bool> checkIfEmailExists(String email) async {
+  //   final response = await http.get(
+  //       Uri.parse('https://admin.mylocalmesh.co.uk/api/check_email$email'));
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     return data['data'];
+  //   } else {
+  //     throw Exception('Failed to check email existence');
+  //   }
+  // }
+
   Future register() async {
     print("register is trigger");
     Get.focusScope.unfocus();
     if (registerFormKey.currentState.validate()) {
       registerFormKey.currentState.save();
-
-      String checkNum =
-          await _userRepository.checkNum(currentUser.value.phoneNumber);
-      print("status phone num $checkNum");
-      if (checkNum == "False") {
-        loading.value = true;
-        try {
-          if (Get.find<SettingsService>().setting.value.enableOtp) {
-            print("this is running first");
-            await _userRepository.sendCodeToPhone();
-            loading.value = false;
-            await Get.toNamed(Routes.PHONE_VERIFICATION);
-          } else {
-            print("this is running second");
-            await Get.find<FireBaseMessagingService>().setDeviceToken();
-            currentUser.value =
-                await _userRepository.register(currentUser.value);
-            await _userRepository.signUpWithEmailAndPassword(
-                currentUser.value.email, currentUser.value.apiToken);
-            // await SendEmail();
-
-            // loading.value = false;
-          }
-        } catch (e) {
-          Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
-        } finally {
-          loading.value = false;
-        }
+      String isvalidemail =
+          await _userRepository.checkEmail(currentUser.value.email);
+      if (isvalidemail == "True") {
+        Get.showSnackbar(Ui.ErrorSnackBar(
+            message: '${currentUser.value.email} is already exist'));
       } else {
-        Get.showSnackbar(Ui.ErrorSnackBar(message: "Number already used"));
+        String checkNum =
+            await _userRepository.checkNum(currentUser.value.phoneNumber);
+        print("status phone num $checkNum");
+        if (checkNum == "False") {
+          loading.value = true;
+          try {
+            if (Get.find<SettingsService>().setting.value.enableOtp) {
+              print("this is running first");
+              await _userRepository.sendCodeToPhone();
+              loading.value = false;
+              await Get.toNamed(Routes.PHONE_VERIFICATION);
+            } else {
+              print("this is running second");
+              await Get.find<FireBaseMessagingService>().setDeviceToken();
+              currentUser.value =
+                  await _userRepository.register(currentUser.value);
+              await _userRepository.signUpWithEmailAndPassword(
+                  currentUser.value.email, currentUser.value.apiToken);
+              // await SendEmail();
+
+              // loading.value = false;
+            }
+          } catch (e) {
+            Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+          } finally {
+            loading.value = false;
+          }
+        } else {
+          Get.showSnackbar(Ui.ErrorSnackBar(message: "Number already used"));
+        }
       }
     }
   }
 
-  Future SendEmail() async {
-    try {
-      await _eProviderRepository.sendEmail(currentUser.value.email);
-      // await Get.offAllNamed(Routes.LOGIN);
-    } catch (e) {
-      Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
-    }
-  }
+  // Future SendEmail() async {
+  //   try {
+  //     await _eProviderRepository.sendEmail(currentUser.value.email);
+  //     // await Get.offAllNamed(Routes.LOGIN);
+  //   } catch (e) {
+  //     Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
+  //   }
+  // }
 
   Future<void> verifyPhone() async {
     try {
@@ -199,8 +219,8 @@ class AuthController extends GetxController {
       currentUser.value = await _userRepository.register(currentUser.value);
       await _userRepository.signUpWithEmailAndPassword(
           currentUser.value.email, currentUser.value.apiToken);
-      await createEProviderForm();
-      await _eProviderRepository.sendEmail(currentUser.value.email);
+      // await createEProviderForm();
+      // await _eProviderRepository.sendEmail(currentUser.value.email);
 
       loading.value = false;
       await Get.offAllNamed(Routes.LOGIN);

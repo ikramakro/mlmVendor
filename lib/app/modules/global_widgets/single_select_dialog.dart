@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../common/ui.dart';
+
 class SingleSelectDialogItem<V> {
   const SingleSelectDialogItem(this.value, this.label);
 
@@ -50,10 +52,20 @@ class _SingleSelectDialogState<V> extends State<SingleSelectDialog<V>> {
   }
 
   void _onCancelTap() {
-    Navigator.pop(context);
+    Navigator.pop(
+      context,
+    );
   }
 
   void _onSubmitTap() {
+    if (_selectedValues == null || _selectedValues.isEmpty) {
+    } else {
+      Ui.defaultSnackBar(
+              message:
+                  ' please select your category carefully, you won\'t be able to change it once u register.',
+              title: 'Warning')
+          .show();
+    }
     Navigator.pop(context, _selectedValues);
   }
 

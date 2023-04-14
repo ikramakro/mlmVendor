@@ -11,6 +11,7 @@ import '../../../models/media_model.dart';
 import '../../../providers/laravel_provider.dart';
 import '../../../routes/app_routes.dart';
 import '../../global_widgets/circular_loading_widget.dart';
+import '../../global_widgets/image_field_widget.dart';
 import '../controllers/e_provider_controller.dart';
 import '../widgets/availability_hour_item_widget.dart';
 import '../widgets/e_provider_til_widget.dart';
@@ -32,7 +33,7 @@ class EProviderView extends GetView<EProviderController> {
             child: new Icon(Icons.edit_outlined,
                 size: 28, color: Get.theme.primaryColor),
             onPressed: () => {
-              Get.toNamed(Routes.E_PROVIDER_ADDRESSES_FORM,
+              Get.toNamed(Routes.E_PROVIDER_FORM,
                   arguments: {'eProvider': _eProvider})
             },
             backgroundColor: Get.theme.colorScheme.secondary,
@@ -81,13 +82,40 @@ class EProviderView extends GetView<EProviderController> {
                       children: [
                         SizedBox(height: 10),
                         EProviderTilWidget(
-                          title: Text("Profile Overview".tr,
-                              style: Get.textTheme.subtitle2),
-                          content: Ui.applyHtml(_eProvider.description ?? '',
-                              style: Get.textTheme.bodyText1),
+                          title:
+                              Text("About".tr, style: Get.textTheme.subtitle2),
+                          content: Obx(
+                            () => Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    _eProvider.description,
+                                    maxLines:
+                                        controller.isExpanded.value ? null : 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Get.textTheme.bodyText1,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.isExpanded.value =
+                                        !controller.isExpanded.value;
+                                  },
+                                  child: Text(
+                                    controller.isExpanded.value
+                                        ? 'Read more'
+                                        : 'Read less',
+                                    style: TextStyle(
+                                        color: Colors.blue, fontSize: 11),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // content: Ui.applyHtml(_eProvider.description ?? '',
+                          //     style: Get.textTheme.bodyText1),
                         ),
-                        buildAddresses(context),
-                        buildAvailabilityHours(_eProvider),
+
                         buildAwards(),
                         // buildExperiences(),
                         EProviderTilWidget(
@@ -107,7 +135,10 @@ class EProviderView extends GetView<EProviderController> {
                             ).paddingSymmetric(horizontal: 20),
                           ],
                         ),
+
                         buildGalleries(),
+                        buildAvailabilityHours(_eProvider),
+                        buildAddresses(context),
                       ],
                     ),
                   ),
@@ -125,8 +156,18 @@ class EProviderView extends GetView<EProviderController> {
       }
       return EProviderTilWidget(
         horizontalPadding: 0,
-        title: Text("Galleries".tr, style: Get.textTheme.subtitle2)
-            .paddingSymmetric(horizontal: 20),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Images".tr, style: Get.textTheme.subtitle2)
+                .paddingSymmetric(horizontal: 20),
+            TextButton(
+                onPressed: () {
+                  Get.offAndToNamed(Routes.PortfolioAlbumView);
+                },
+                child: Text('View All'))
+          ],
+        ),
         content: Container(
           height: 120,
           child: ListView.builder(

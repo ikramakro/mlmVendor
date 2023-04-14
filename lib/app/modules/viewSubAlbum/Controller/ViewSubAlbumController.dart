@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../../../common/ui.dart';
+import '../../../models/SubAlbum_model.dart';
 import '../../../models/album_model2.dart';
 import '../../../models/e_provider_model.dart';
 import '../../../repositories/e_provider_repository.dart';
@@ -41,7 +42,7 @@ class ViewSubAlbumsController extends GetxController {
   }
 
   // Future getSubAlbums() async {
-  //   subAlbums.value = [];
+  //   List subAlbums = [];
   //   try {
   //     List<SubAlbum> _galleries =
   //         await _eProviderRepository.getSubAlbums(album.value.id);

@@ -126,6 +126,21 @@ class LaravelApiClient extends GetxService with ApiClient {
     }
   }
 
+  Future<String> getUserEmail(String email) async {
+    print("check num in fuction $email");
+    Uri _uri = Uri.parse('https://admin.mylocalmesh.co.uk/api/check_email');
+    var response = await _httpClient.postUri(
+      _uri,
+      data: {'email': '$email'},
+      options: _optionsNetwork,
+    );
+    if (response.data['success'] == true) {
+      return response.data['data'];
+    } else {
+      throw new Exception(response.data['message']);
+    }
+  }
+
   Future<User> login(User user) async {
     Uri _uri = getApiBaseUri("provider/login");
     var response = await _httpClient.postUri(
@@ -163,7 +178,9 @@ class LaravelApiClient extends GetxService with ApiClient {
   }
 
   Future<bool> sendResetLinkEmail(User user) async {
-    Uri _uri = getApiBaseUri("provider/send_reset_link_email");
+    //When user not varify email and the email is expired and send again Add Like this
+    // Uri _uri = getApiBaseUri("provider/send_reset_link_email");
+    Uri _uri = getApiBaseUri("send_reset_link_email");
 
     // to remove other attributes from the user object
     user = new User(email: user.email);
@@ -183,8 +200,11 @@ class LaravelApiClient extends GetxService with ApiClient {
     var _queryParameters = {
       'api_token': authService.apiToken,
     };
-    Uri _uri = getApiBaseUri("provider/users/${user.id}")
-        .replace(queryParameters: _queryParameters);
+
+    Uri _uri = user.isProvider
+        ? getApiBaseUri("provider/users/${user.id}")
+        : getApiBaseUri("users/${user.id}")
+            .replace(queryParameters: _queryParameters);
 
     var response = await _httpClient.postUri(
       _uri,
@@ -536,7 +556,7 @@ class LaravelApiClient extends GetxService with ApiClient {
     try {
       var map = new Map<String, dynamic>();
       map['email'] = '$email';
-      Uri _uri = getApiBaseUri("send_verification_link");
+      Uri _uri = getApiBaseUri("providr/send_verification_link");
       var response =
           await _httpClient.postUri(_uri, data: map, options: _optionsNetwork);
       if (response.data['success'] == true) {
@@ -1484,7 +1504,7 @@ class LaravelApiClient extends GetxService with ApiClient {
 
   Future<List<Booking>> getBookings(String statusId, int page) async {
     var _queryParameters = {
-      'with': 'bookingStatus;payment;payment.paymentStatus',
+      'with': 'bookingStatus;user;payment;payment.paymentStatus',
       'api_token': authService.apiToken,
       'search': 'booking_status_id:${statusId}',
       'orderBy': 'created_at',

@@ -47,6 +47,7 @@ class EditPortfolioController extends GetxController {
   final heroTag = "".obs;
   // GlobalKey<FormState> profileForm;
   EProviderRepository _eProviderRepository;
+  final galleriess = <Media>[].obs;
 
   EditPortfolioController() {
     portfolioEditForm = GlobalKey<FormState>();
@@ -62,6 +63,7 @@ class EditPortfolioController extends GetxController {
     heroTag.value = arguments['hero'] as String;
     eProvider.value = arguments['eProvider'] as EProvider;
     print("this is calling every time");
+    getGalleries();
     super.onInit();
   }
 
@@ -94,6 +96,20 @@ class EditPortfolioController extends GetxController {
       } else {
         Get.offNamed(Routes.PortfolioAlbumView, preventDuplicates: false);
       }
+    }
+  }
+
+  Future getGalleries() async {
+    try {
+      final _galleries =
+          await _eProviderRepository.getGalleries(eProvider.value.id);
+      galleriess.assignAll(_galleries.map((e) {
+        e.image.name = e.description;
+        e.image.id = e.id;
+        return e.image;
+      }));
+    } catch (e) {
+      Get.showSnackbar(Ui.ErrorSnackBar(message: e.toString()));
     }
   }
 }

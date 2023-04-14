@@ -46,7 +46,7 @@ class ServicesListItemWidget extends StatelessWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
                     child: CachedNetworkImage(
-                      height: 80,
+                      height: 100,
                       width: 80,
                       fit: BoxFit.cover,
                       imageUrl: _service.firstImageUrl,
@@ -61,46 +61,46 @@ class ServicesListItemWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (_service.eProvider.available)
-                  Container(
-                    width: 80,
-                    child: Text("Available".tr,
-                        maxLines: 1,
-                        style: Get.textTheme.bodyText2.merge(
-                          TextStyle(
-                              color: Colors.green, height: 1.4, fontSize: 10),
-                        ),
-                        softWrap: false,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withOpacity(0.2),
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10)),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-                  ),
-                if (!_service.eProvider.available)
-                  Container(
-                    width: 80,
-                    child: Text("Offline".tr,
-                        maxLines: 1,
-                        style: Get.textTheme.bodyText2.merge(
-                          TextStyle(
-                              color: Colors.grey, height: 1.4, fontSize: 10),
-                        ),
-                        softWrap: false,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10)),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-                  ),
+                // if (_service.eProvider.available)
+                //   Container(
+                //     width: 80,
+                //     child: Text("Available".tr,
+                //         maxLines: 1,
+                //         style: Get.textTheme.bodyText2.merge(
+                //           TextStyle(
+                //               color: Colors.green, height: 1.4, fontSize: 10),
+                //         ),
+                //         softWrap: false,
+                //         textAlign: TextAlign.center,
+                //         overflow: TextOverflow.fade),
+                //     decoration: BoxDecoration(
+                //       color: Colors.green.withOpacity(0.2),
+                //       borderRadius: BorderRadius.only(
+                //           bottomRight: Radius.circular(10),
+                //           bottomLeft: Radius.circular(10)),
+                //     ),
+                //     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+                //   ),
+                // if (!_service.eProvider.available)
+                //   Container(
+                //     width: 80,
+                //     child: Text("Offline".tr,
+                //         maxLines: 1,
+                //         style: Get.textTheme.bodyText2.merge(
+                //           TextStyle(
+                //               color: Colors.grey, height: 1.4, fontSize: 10),
+                //         ),
+                //         softWrap: false,
+                //         textAlign: TextAlign.center,
+                //         overflow: TextOverflow.fade),
+                //     decoration: BoxDecoration(
+                //       color: Colors.grey.withOpacity(0.2),
+                //       borderRadius: BorderRadius.only(
+                //           bottomRight: Radius.circular(10),
+                //           bottomLeft: Radius.circular(10)),
+                //     ),
+                //     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+                //   ),
               ],
             ),
             SizedBox(width: 12),
@@ -156,7 +156,7 @@ class ServicesListItemWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "From (%s)"
+                            "Start From "
                                 .trArgs([_service.totalReviews.toString()]),
                             style: Get.textTheme.bodyText1,
                           ),
@@ -182,51 +182,51 @@ class ServicesListItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      // TODO check if eProvider is company or freelancer
-                      // Icon(
-                      //   Icons.person_outline,
-                      //   size: 18,
-                      //   color: Get.theme.focusColor,
-                      // ),
-                      Icon(
-                        Icons.build_circle_outlined,
-                        size: 18,
-                        color: Get.theme.focusColor,
-                      ),
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          _service.eProvider.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                          style: Get.textTheme.bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.place_outlined,
-                        size: 18,
-                        color: Get.theme.focusColor,
-                      ),
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          // TODO eProvider address
-                          _service.eProvider.firstAddress,
-                          maxLines: 1,
-                          overflow: TextOverflow.fade,
-                          softWrap: false,
-                          style: Get.textTheme.bodyText1,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     // TODO check if eProvider is company or freelancer
+                  //     // Icon(
+                  //     //   Icons.person_outline,
+                  //     //   size: 18,
+                  //     //   color: Get.theme.focusColor,
+                  //     // ),
+                  //     Icon(
+                  //       Icons.build_circle_outlined,
+                  //       size: 18,
+                  //       color: Get.theme.focusColor,
+                  //     ),
+                  //     SizedBox(width: 5),
+                  //     Flexible(
+                  //       child: Text(
+                  //         _service.eProvider.name,
+                  //         maxLines: 1,
+                  //         overflow: TextOverflow.fade,
+                  //         softWrap: false,
+                  //         style: Get.textTheme.bodyText1,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Icon(
+                  //       Icons.place_outlined,
+                  //       size: 18,
+                  //       color: Get.theme.focusColor,
+                  //     ),
+                  //     SizedBox(width: 5),
+                  //     // Flexible(
+                  //     //   child: Text(
+                  //     //     // TODO eProvider address
+                  //     //     _service.eProvider.firstAddress,
+                  //     //     maxLines: 1,
+                  //     //     overflow: TextOverflow.fade,
+                  //     //     softWrap: false,
+                  //     //     style: Get.textTheme.bodyText1,
+                  //     //   ),
+                  //     // ),
+                  //   ],
+                  // ),
                   Divider(height: 8, thickness: 1),
                   Wrap(
                     spacing: 5,

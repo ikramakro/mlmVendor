@@ -18,6 +18,7 @@ import '../../global_widgets/single_select_dialog.dart';
 import '../../global_widgets/text_field_widget.dart';
 import '../../root/controllers/root_controller.dart';
 import '../controllers/auth_controller.dart';
+import 'terms_&_condition.dart';
 
 class RegisterView extends GetView<AuthController> {
   final Setting _settings = Get.find<SettingsService>().setting.value;
@@ -113,7 +114,7 @@ class RegisterView extends GetView<AuthController> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextFieldWidget(
-                        labelText: "Full Name".tr,
+                        labelText: "*Full Name".tr,
                         hintText: "John Doe".tr,
                         initialValue: controller.currentUser?.value?.name,
                         onSaved: (input) =>
@@ -128,7 +129,7 @@ class RegisterView extends GetView<AuthController> {
                       RegisterTextFieldWidget(
                         // isFirst: true,
                         controller: controller.emailController,
-                        labelText: "Email Address".tr,
+                        labelText: "*Email Address".tr,
                         hintText: "johndoe@gmail.com".tr,
                         initialValue: controller.currentUser?.value?.email,
                         onSaved: (input) =>
@@ -153,21 +154,21 @@ class RegisterView extends GetView<AuthController> {
                         iconData: Icons.alternate_email,
                         // isLast: false,
                       ),
-                      TextFieldWidget(
-                        isFirst: false,
-                        onSaved: (input) =>
-                            controller.eProvider.value.description = input,
-                        validator: (input) => input.length < 3
-                            ? "Should be more than 3 letters".tr
-                            : null,
-                        keyboardType: TextInputType.multiline,
-                        initialValue: controller.eProvider.value.description,
-                        hintText: "Description for Architect Mayer Group".tr,
-                        labelText: "*Description".tr,
-                      ),
+                      // TextFieldWidget(
+                      //   isFirst: false,
+                      //   onSaved: (input) =>
+                      //       controller.eProvider.value.description = input,
+                      //   validator: (input) => input.length < 3
+                      //       ? "Should be more than 3 letters".tr
+                      //       : null,
+                      //   keyboardType: TextInputType.multiline,
+                      //   initialValue: controller.eProvider.value.description,
+                      //   hintText: "Description for Architect Mayer Group".tr,
+                      //   labelText: "*Description".tr,
+                      // ),
                       PhoneFieldWidget(
                         readOnly: false,
-                        labelText: "Phone Number".tr,
+                        labelText: "*Phone Number".tr,
                         hintText: "223 665 7896".tr,
                         initialCountryCode: controller.currentUser?.value
                             ?.getPhoneNumber()
@@ -195,7 +196,7 @@ class RegisterView extends GetView<AuthController> {
                         keyboardType: TextInputType.numberWithOptions(
                             signed: false, decimal: true),
                         hintText: "5".tr,
-                        labelText: "Availability Range".tr,
+                        labelText: "*Availability Range".tr,
                         suffix: Text(Get.find<SettingsService>()
                             .setting
                             .value
@@ -232,7 +233,7 @@ class RegisterView extends GetView<AuthController> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        "Provider Types".tr,
+                                        "*Provider Types".tr,
                                         style: Get.textTheme.bodyText1,
                                         textAlign: TextAlign.start,
                                       ),
@@ -321,7 +322,7 @@ class RegisterView extends GetView<AuthController> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Category".tr,
+                                    "*Category".tr,
                                     style: Get.textTheme.bodyText1,
                                     textAlign: TextAlign.start,
                                   ),
@@ -355,6 +356,7 @@ class RegisterView extends GetView<AuthController> {
                                         );
                                       },
                                     );
+
                                     controller.selectedCategory.value =
                                         selectedValues?.toList();
                                     controller.selectedCategoryId.value =
@@ -395,6 +397,14 @@ class RegisterView extends GetView<AuthController> {
                                     style: Get.textTheme.caption,
                                   ),
                                 );
+                              } else if (controller.selectedCategory.isEmpty) {
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  child: Text(
+                                    "Select Category".tr,
+                                    style: Get.textTheme.caption,
+                                  ),
+                                );
                               }
                               // else if (!controller.categoryName.value.isEmpty) {
                               //   return buildProviderCategory(
@@ -411,14 +421,12 @@ class RegisterView extends GetView<AuthController> {
                       Obx(() {
                         return RegisterTextFieldWidget(
                           controller: controller.passwordController,
-                          labelText: "Password".tr,
+                          labelText: "*Password".tr,
                           hintText: "••••••••••••".tr,
                           initialValue: controller.currentUser?.value?.password,
                           onSaved: (input) =>
                               controller.currentUser.value.password = input,
-                          validator: (input) => input.length < 3
-                              ? "Should be more than 3 characters".tr
-                              : null,
+                          validator: (input) => validatePassword(input),
                           obscureText: controller.hidePassword.value,
                           iconData: Icons.lock_outline,
                           keyboardType: TextInputType.visiblePassword,
@@ -464,6 +472,27 @@ class RegisterView extends GetView<AuthController> {
                           ),
                         );
                       }),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.width * 2 / 100,
+                      // ),
+                      Row(
+                        children: [
+                          Obx(
+                            () => Checkbox(
+                                value: controller.checkBoxValue.value,
+                                onChanged: (value) {
+                                  controller.checkBoxValue.value =
+                                      !controller.checkBoxValue.value;
+                                }),
+                          ),
+                          TextButton(
+                            child: Text('Terms and Condition'),
+                            onPressed: () {
+                              Get.to(() => TermsAndConditionsScreen());
+                            },
+                          )
+                        ],
+                      )
                     ],
                   );
                 }
@@ -481,16 +510,26 @@ class RegisterView extends GetView<AuthController> {
                 SizedBox(
                   width: Get.width,
                   child: BlockButtonWidget(
-                    onPressed: () async {
-                      if (!controller.selectedCategory.isEmpty &&
-                          controller.eProvider.value.type != null) {
-                        await controller.register();
+                    onPressed: () {
+                      if (controller.checkBoxValue.value) {
+                        Get.log('button is ok');
+                        return controller.register();
                       } else {
                         Get.showSnackbar(Ui.ErrorSnackBar(
-                            message:
-                                "There are errors in some fields please correct them!"
-                                    .tr));
+                            message: 'Check Terms & Condition'));
+
+                        return null;
                       }
+
+                      // if (!controller.selectedCategory.isEmpty &&
+                      //     controller.eProvider.value.type != null) {
+                      //
+                      // } else {
+                      //   Get.showSnackbar(Ui.ErrorSnackBar(
+                      //       message:
+                      //           "Fill up all Mendatory Fields"
+                      //               .tr));
+                      // }
 
                       //Get.offAllNamed(Routes.PHONE_VERIFICATION);
                     },
@@ -540,4 +579,26 @@ class RegisterView extends GetView<AuthController> {
       ),
     );
   }
+}
+
+String validatePassword(String value) {
+  if (value == null || value.isEmpty) {
+    return 'Password is required.';
+  }
+  if (value.length < 8) {
+    return 'Password must be at least 8 characters long.';
+  }
+  if (!value.contains(new RegExp(r'[A-Z]'))) {
+    return 'Password must contain at least 1 capital letter.';
+  }
+  if (!value.contains(new RegExp(r'[a-z]'))) {
+    return 'Password must contain at least 1 small letter.';
+  }
+  if (!value.contains(new RegExp(r'[0-9]'))) {
+    return 'Password must contain at least 1 number.';
+  }
+  if (!value.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+    return 'Password must contain at least 1 special character.';
+  }
+  return null;
 }

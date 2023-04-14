@@ -212,13 +212,13 @@ class ProfileView extends GetView<ProfileController> {
               //   labelText: "Address".tr,
               //   iconData: Icons.map_outlined,
               // ),
-              TextFieldWidget(
-                onSaved: (input) => controller.user.value.bio = input,
-                initialValue: controller.user.value.bio,
-                hintText: "Your short biography here".tr,
-                labelText: "Short Biography".tr,
-                iconData: Icons.article_outlined,
-              ),
+              // TextFieldWidget(
+              //   onSaved: (input) => controller.user.value.bio = input,
+              //   initialValue: controller.user.value.bio,
+              //   hintText: "Your short biography here".tr,
+              //   labelText: "Short Biography".tr,
+              //   iconData: Icons.article_outlined,
+              // ),
               Text("Change password".tr, style: Get.textTheme.headline5)
                   .paddingOnly(top: 25, bottom: 0, right: 22, left: 22),
               Text(

@@ -30,7 +30,7 @@ class PortfolioAndAlbumView extends GetView<AlbumViewController> {
           )
         ],
         title: Text(
-          "Portfolio and Album".tr,
+          "Portfolios and Albums".tr,
           style: context.textTheme.headline6,
         ),
         centerTitle: true,
@@ -77,7 +77,7 @@ class PortfolioAndAlbumView extends GetView<AlbumViewController> {
                                             10)),
                             tabs: [
                               Text(
-                                "Portfolio",
+                                "Portfolios",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width /

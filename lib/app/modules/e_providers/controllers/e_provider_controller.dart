@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common/ui.dart';
@@ -10,9 +11,20 @@ import '../../../models/message_model.dart';
 import '../../../models/review_model.dart';
 import '../../../models/user_model.dart';
 import '../../../repositories/e_provider_repository.dart';
+import '../../../repositories/user_repository.dart';
 import '../../../routes/app_routes.dart';
+import '../../../services/auth_service.dart';
 
 class EProviderController extends GetxController {
+  GlobalKey<FormState> profileForm;
+  final isExpanded = false.obs;
+  var avatar = new Media().obs;
+  var user = new User().obs;
+  final available_status = "Available to get orders".obs;
+  final availableStatusValueBool = true.obs;
+  final availableStatusValue = 1.obs;
+  UserRepository _userRepository;
+  final eProviders = <EProvider>[].obs;
   final eProvider = EProvider().obs;
   final reviews = <Review>[].obs;
   final awards = <Award>[].obs;

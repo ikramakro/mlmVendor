@@ -73,7 +73,7 @@ class AlbumView extends GetView<AlbumViewController> {
                     itemCount: controller.album.length,
                     scrollDirection: Axis.vertical,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                        crossAxisCount: 2,
                         crossAxisSpacing: 5.0,
                         mainAxisSpacing: 5.0),
                     itemBuilder: (context, index) {

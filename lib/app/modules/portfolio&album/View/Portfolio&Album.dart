@@ -12,7 +12,7 @@ class PortfolioAndAlbum extends GetView<AlbumController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Portfolio and Album".tr,
+          "Portfolios and Album".tr,
           style: context.textTheme.headline6,
         ),
         centerTitle: true,
@@ -60,7 +60,7 @@ class PortfolioAndAlbum extends GetView<AlbumController> {
                                             10)),
                             tabs: [
                               Text(
-                                "Portfolio",
+                                "Portfolios",
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width /

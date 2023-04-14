@@ -12,7 +12,6 @@ import '../../../models/user_model.dart';
 import '../../../repositories/chat_repository.dart';
 import '../../../repositories/notification_repository.dart';
 import '../../../services/auth_service.dart';
-import '../../bookings/controllers/booking_controller.dart';
 
 class MessagesController extends GetxController {
   final uploading = false.obs;
@@ -103,6 +102,7 @@ class MessagesController extends GetxController {
   }
 
   listenForChats() async {
+    print("listen for chat ${message.value}");
     message.value = await _chatRepository.getMessage(message.value);
     message.value.readByUsers.add(_authService.user.value.id);
     _chatRepository.getChats(message.value).listen((event) {
@@ -113,6 +113,8 @@ class MessagesController extends GetxController {
   addMessage(Message _message, String text) {
     Chat _chat = new Chat(text, DateTime.now().millisecondsSinceEpoch,
         _authService.user.value.id, _authService.user.value);
+    print("check this message onclick");
+    print(_message);
     if (_message.id == null) {
       _message.id = UniqueKey().toString();
       createMessage(_message);
@@ -148,10 +150,5 @@ class MessagesController extends GetxController {
       Get.showSnackbar(
           Ui.ErrorSnackBar(message: "Please select an image file".tr));
     }
-  }
-
-  String getUsernam() {
-    String username = Get.find<BookingController>().booking.value.user.name;
-    return username;
   }
 }

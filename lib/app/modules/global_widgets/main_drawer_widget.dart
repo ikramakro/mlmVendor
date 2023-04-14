@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../routes/app_routes.dart';
@@ -9,6 +10,7 @@ import '../../services/auth_service.dart';
 import '../../services/settings_service.dart';
 import '../custom_pages/views/custom_page_drawer_link_widget.dart';
 import '../e_providers/controllers/e_providers_controller.dart';
+import '../home/controllers/home_controller.dart';
 import '../root/controllers/root_controller.dart' show RootController;
 import 'drawer_link_widget.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -379,6 +381,12 @@ class MainDrawerWidget extends GetView<EProvidersController> {
                 onTap: (e) async {
                   await Get.find<AuthService>().clear();
                   await Get.find<AuthService>().removeCurrentUser();
+                  // Clear cache
+                  // await DefaultCacheManager().emptyCache();
+                  // // Clear shared preferences
+                  // final prefs = await SharedPreferences.getInstance();
+                  // await prefs.clear();
+                  // await Get.find<HomeController>().refreshHome();
                   await Get.offNamedUntil(Routes.LOGIN, (Route route) {
                     if (route.settings.name == Routes.LOGIN) {
                       return true;

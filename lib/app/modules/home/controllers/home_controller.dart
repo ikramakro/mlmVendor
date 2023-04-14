@@ -43,6 +43,13 @@ class HomeController extends GetxController {
     _authService = Get.find<AuthService>();
   }
 
+  // @override
+  // void onInit() async {
+  //   super.onInit();
+  //   await refreshHome();
+  //   await listenForMessages();
+  //   await TotalRequestsCompleted();
+  // }
   @override
   Future<void> onInit() async {
     await refreshHome();
@@ -104,6 +111,7 @@ class HomeController extends GetxController {
         }
       });
     }
+    refreshHome();
   }
 
   void changeTab(String statusId) async {

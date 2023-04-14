@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:home_services_provider/app/modules/messages/views/chats_view.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../../common/ui.dart';
 import '../../../models/booking_model.dart';
 import '../../../routes/app_routes.dart';
+import '../../bookings/controllers/booking_controller.dart';
+import '../../messages/views/messages_view.dart';
 import 'booking_options_popup_menu_widget.dart';
 
 class BookingsListItemWidget extends StatelessWidget {
@@ -74,7 +77,7 @@ class BookingsListItemWidget extends StatelessWidget {
                   width: 80,
                   child: Column(
                     children: [
-                      Text(DateFormat('HH:mm').format(_booking.bookingAt),
+                      Text("#${_booking.id}",
                           maxLines: 1,
                           style: Get.textTheme.bodyText2.merge(
                             TextStyle(
@@ -135,39 +138,84 @@ class BookingsListItemWidget extends StatelessWidget {
                     Divider(height: 8, thickness: 1),
                     Row(
                       children: [
-                        Icon(
-                          Icons.build_circle_outlined,
-                          size: 18,
-                          color: Get.theme.focusColor,
-                        ),
-                        SizedBox(width: 5),
-                        Flexible(
-                          child: Text(
-                            _booking.eProvider.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style: Get.textTheme.bodyText1,
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.build_circle_outlined,
+                                    size: 18,
+                                    color: Get.theme.focusColor,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Flexible(
+                                    child: Text(
+                                      _booking.user?.name ?? 'Unknown',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.fade,
+                                      softWrap: false,
+                                      style: Get.textTheme.bodyText1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.place_outlined,
+                                    size: 18,
+                                    color: Get.theme.focusColor,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Flexible(
+                                    child: Text(
+                                      _booking.address.address,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.fade,
+                                      softWrap: false,
+                                      style: Get.textTheme.bodyText1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.place_outlined,
-                          size: 18,
-                          color: Get.theme.focusColor,
-                        ),
-                        SizedBox(width: 5),
-                        Flexible(
-                          child: Text(
-                            _booking.address.address,
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style: Get.textTheme.bodyText1,
-                          ),
+                        Column(
+                          children: [
+                            MaterialButton(
+                              onPressed: () async {
+                                // await Get.put(BookingController());
+                                // BookingController bookingController =
+                                //     await Get.find<BookingController>();
+                                // bookingController.messages.value = [];
+                                // bool chatExist = await bookingController
+                                //     .listenForMessages(_booking);
+
+                                // if (chatExist == false) {
+                                //   bookingController.startChat();
+                                // }
+                                // bookingController.startChat();
+                                // Get.to(
+                                //   () => MessagesView(),
+                                // );
+                              },
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              color: Get.theme.colorScheme.secondary
+                                  .withOpacity(0.2),
+                              padding: EdgeInsets.zero,
+                              height: 44,
+                              minWidth: 44,
+                              child: Icon(
+                                Icons.chat_outlined,
+                                color: Get.theme.colorScheme.secondary,
+                              ),
+                              elevation: 0,
+                            ),
+                            Text('Contact')
+                          ],
                         ),
                       ],
                     ),

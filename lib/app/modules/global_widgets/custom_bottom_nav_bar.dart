@@ -37,7 +37,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 80,
       color: widget.backgroundColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -50,46 +50,41 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             onTap: () {
               _changeIndex(index);
             },
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 200),
-              width: widget.currentIndex == index
-                  ? MediaQuery.of(context).size.width / widget.children.length +
-                      20
-                  : 50,
-              padding: EdgeInsets.only(left: 10, right: 10),
-              margin: EdgeInsets.only(top: 10, bottom: 10),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: widget.currentIndex == index
-                      ? color.withOpacity(0.2)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Icon(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height * 5.5 / 100,
+                  width: MediaQuery.of(context).size.width * 10 / 100,
+                  decoration: BoxDecoration(
+                      color: widget.currentIndex == index
+                          ? color
+                          : Color.fromARGB(31, 60, 60, 60),
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Icon(
                     icon,
                     size: 24,
                     color: widget.currentIndex == index
-                        ? color
-                        : color.withOpacity(0.5),
+                        ? Colors.white
+                        : Colors.black54,
                   ),
-                  widget.currentIndex == index
-                      ? Expanded(
-                          flex: 2,
-                          child: Text(
-                            label ?? '',
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: widget.currentIndex == index
-                                    ? color
-                                    : color.withOpacity(0.5)),
-                          ),
-                        )
-                      : Container()
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    label ?? '',
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: widget.currentIndex == index
+                            ? color
+                            : Colors.black),
+                  ),
+                )
+              ],
             ),
           );
         }).toList(),

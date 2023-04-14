@@ -78,13 +78,25 @@ class DeleteAccountWidget extends GetView<ProfileController> {
             style: TextStyle(color: Colors.redAccent),
           ),
           content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text(
-                    "Once you delete this account, there is no going back. Please be certain."
-                        .tr,
-                    style: Get.textTheme.bodyText1),
-              ],
+            child: Obx(
+              () => Column(
+                children: <Widget>[
+                  Text(
+                      "Once you delete this account, there is no going back. Please be certain."
+                          .tr,
+                      style: Get.textTheme.bodyText1),
+                  Row(
+                    children: [
+                      Checkbox(
+                          value: controller.val.value,
+                          onChanged: (value) {
+                            controller.val.value = value;
+                          }),
+                      Expanded(child: Text('want to optout from marketing'))
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           actions: <Widget>[

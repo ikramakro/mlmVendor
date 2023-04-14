@@ -97,8 +97,32 @@ class EServiceView extends GetView<EServiceController> {
                             if (controller.eService.value.description == '') {
                               return SizedBox();
                             }
-                            return Ui.applyHtml(_eService.description,
-                                style: Get.textTheme.bodyText1);
+                            return Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    _eService.description,
+                                    maxLines:
+                                        controller.isExpanded.value ? null : 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Get.textTheme.bodyText1,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.isExpanded.value =
+                                        !controller.isExpanded.value;
+                                  },
+                                  child: Text(
+                                    controller.isExpanded.value
+                                        ? 'Read more'
+                                        : 'Read less',
+                                    style: TextStyle(
+                                        color: Colors.blue, fontSize: 11),
+                                  ),
+                                ),
+                              ],
+                            );
                           }),
                         ),
                         // buildDuration(_eService),

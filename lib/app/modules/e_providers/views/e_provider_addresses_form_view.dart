@@ -73,7 +73,8 @@ class EProviderAddressesFormView
                     onPressed: controller.eProvider.value.addresses.isEmpty
                         ? null
                         : () async {
-                            await Get.toNamed(Routes.E_PROVIDER_FORM,
+                            await Get.toNamed(
+                                Routes.E_PROVIDER_AVAILABILITY_FORM,
                                 arguments: {
                                   'eProvider': controller.eProvider.value
                                 });
@@ -101,20 +102,20 @@ class EProviderAddressesFormView
           padding: EdgeInsets.only(bottom: 60),
           children: [
             HorizontalStepperWidget(
-              controller: new ScrollController(initialScrollOffset: 0),
+              controller: new ScrollController(initialScrollOffset: 50),
               steps: [
                 StepWidget(
                   title: Text(
-                    "Addresses".tr,
+                    "Business Page".tr,
                   ),
+                  color: Get.theme.focusColor,
                   index: Text("1",
                       style: TextStyle(color: Get.theme.primaryColor)),
                 ),
                 StepWidget(
                   title: Text(
-                    "Provider Details".tr,
+                    "Addresses".tr,
                   ),
-                  color: Get.theme.focusColor,
                   index: Text("2",
                       style: TextStyle(color: Get.theme.primaryColor)),
                 ),

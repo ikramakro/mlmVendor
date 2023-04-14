@@ -183,7 +183,7 @@ class Portfolio extends GetView<PortfolioController> {
                                             shape: StadiumBorder(),
                                             color: Get.theme.focusColor
                                                 .withOpacity(0.1),
-                                            child: Text("Reset".tr,
+                                            child: Text("Delete".tr,
                                                 style: Get.textTheme.bodyText1),
                                             elevation: 0,
                                             hoverElevation: 0,

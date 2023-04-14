@@ -25,7 +25,7 @@ class ForgotPasswordView extends GetView<AuthController> {
           ),
           centerTitle: true,
           backgroundColor: Get.theme.colorScheme.secondary,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           elevation: 0,
         ),
         body: Form(
@@ -56,7 +56,7 @@ class ForgotPasswordView extends GetView<AuthController> {
                       child: Column(
                         children: [
                           Text(
-                            _settings.appName,
+                            _settings.providerAppName,
                             style: Get.textTheme.headline6.merge(TextStyle(
                                 color: Get.theme.primaryColor, fontSize: 24)),
                           ),
@@ -128,17 +128,17 @@ class ForgotPasswordView extends GetView<AuthController> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Get.offAllNamed(Routes.REGISTER);
-                            },
-                            child: Text("You remember my password!".tr),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     TextButton(
+                      //       onPressed: () {
+                      //         Get.offAllNamed(Routes.REGISTER);
+                      //       },
+                      //       child: Text("You remember my password!".tr),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   );
                 }

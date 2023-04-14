@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' show DateFormat;
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../common/map.dart';
 import '../../../../common/ui.dart';
@@ -146,34 +145,34 @@ class BookingView extends GetView<BookingController> {
                                     ],
                                   ),
                                   hasDivider: true),
-                              BookingRowWidget(
-                                  description: "Payment Status".tr,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.only(
-                                            right: 12,
-                                            left: 12,
-                                            top: 6,
-                                            bottom: 6),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                          color: Get.theme.focusColor
-                                              .withOpacity(0.1),
-                                        ),
-                                        child: Text(
-                                          controller.booking.value.payment
-                                                  ?.paymentStatus?.status ??
-                                              "Not Paid".tr,
-                                          style: TextStyle(
-                                              color: Get.theme.hintColor),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  hasDivider: true),
+                              // BookingRowWidget(
+                              //     description: "Payment Status".tr,
+                              //     child: Row(
+                              //       mainAxisAlignment: MainAxisAlignment.end,
+                              //       children: [
+                              //         Container(
+                              //           padding: const EdgeInsets.only(
+                              //               right: 12,
+                              //               left: 12,
+                              //               top: 6,
+                              //               bottom: 6),
+                              //           decoration: BoxDecoration(
+                              //             borderRadius: BorderRadius.all(
+                              //                 Radius.circular(5)),
+                              //             color: Get.theme.focusColor
+                              //                 .withOpacity(0.1),
+                              //           ),
+                              //           child: Text(
+                              //             controller.booking.value.payment
+                              //                     ?.paymentStatus?.status ??
+                              //                 "Not Paid".tr,
+                              //             style: TextStyle(
+                              //                 color: Get.theme.hintColor),
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ),
+                              //     hasDivider: true),
                               if (controller
                                       .booking.value.payment?.paymentMethod !=
                                   null)
@@ -205,11 +204,46 @@ class BookingView extends GetView<BookingController> {
                                       ],
                                     ),
                                     hasDivider: true),
-                              BookingRowWidget(
-                                description: "Hint".tr,
-                                child: Ui.removeHtml(
-                                    controller.booking.value.hint,
-                                    alignment: Alignment.centerRight),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.edit),
+                              ).paddingOnly(left: 250),
+                              GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text(
+                                          controller.booking.value.hint,
+                                          style: Get.textTheme.bodyText1,
+                                        ).paddingOnly(left: 20),
+                                        actions: [
+                                          Center(
+                                            child: TextButton(
+                                              child: const Text('Ok'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text('Hint'),
+                                    Expanded(
+                                      child: Text(
+                                        controller.booking.value.hint,
+                                        style: Get.textTheme.bodyText1,
+                                      ).paddingOnly(left: 20),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -263,7 +297,7 @@ class BookingView extends GetView<BookingController> {
                         return SizedBox();
                       else
                         return BookingTilWidget(
-                          title: Text("Booking Date & Time".tr,
+                          title: Text("Booking Delivery Date".tr,
                               style: Get.textTheme.subtitle2),
                           actions: [
                             Obx(
@@ -297,7 +331,7 @@ class BookingView extends GetView<BookingController> {
                                       child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Text(
-                                            DateFormat('d, MMMM y  HH:mm',
+                                            DateFormat('d, MMMM y',
                                                     Get.locale.toString())
                                                 .format(controller
                                                     .booking.value.bookingAt),
@@ -358,20 +392,20 @@ class BookingView extends GetView<BookingController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        BookingRowWidget(
-                                            descriptionFlex: 2,
-                                            valueFlex: 1,
-                                            description: controller
-                                                .booking.value.eService.name,
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: Ui.getPrice(
-                                                  controller.booking.value
-                                                      .eService.getPrice,
-                                                  style:
-                                                      Get.textTheme.subtitle2),
-                                            ),
-                                            hasDivider: true),
+                                        // BookingRowWidget(
+                                        //     descriptionFlex: 2,
+                                        //     valueFlex: 1,
+                                        //     description: controller
+                                        //         .booking.value.eService.name,
+                                        //     child: Align(
+                                        //       alignment: Alignment.centerRight,
+                                        //       child: Ui.getPrice(
+                                        //           controller.booking.value
+                                        //               .eService.getPrice,
+                                        //           style:
+                                        //               Get.textTheme.subtitle2),
+                                        //     ),
+                                        //     hasDivider: true),
                                         Column(
                                           children: List.generate(
                                               controller.booking.value.options
@@ -591,11 +625,11 @@ class BookingView extends GetView<BookingController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          controller.picked.toString()
-                          // DateFormat('d, MMMM y ', Get.locale.toString())
-                          //     .format(controller.booking.value.bookingAt),
-                          ,
-                          style: Get.textTheme.caption,
+                          // controller.picked.toString()
+                          DateFormat('d, MMMM y', Get.locale.toString())
+                              .format(controller.booking.value.bookingAt),
+
+                          style: Get.textTheme.bodySmall,
                           textAlign: TextAlign.start,
                         ),
                         IconButton(
@@ -643,22 +677,7 @@ class BookingView extends GetView<BookingController> {
                               Navigator.of(context).pop();
                               Get.log('Date is run ');
                               Get.log('picked value${controller.picked}');
-                            }
-                            // if (!controller.ChargeForm.currentState
-                            //     .validate()) {
-                            //   controller.ChargeForm.currentState.save();
-                            //   controller.ExtraInBooking();
-                            //   Navigator.of(context).pop();
-                            // }
-
-                            // controller.ChargeForm.currentState.save();
-                            // controller.ExtraInBooking();
-                            // controller.updateBookingDate();
-
-                            // Navigator.of(context).pop();
-                            // controller.AddCharge();
-
-                            else if (!isOpen &&
+                            } else if (!isOpen &&
                                 controller.ChargeForm.currentState.validate()) {
                               controller.ChargeForm.currentState.save();
                               controller.ExtraInBooking();
@@ -748,34 +767,37 @@ class BookingView extends GetView<BookingController> {
               ),
             if (_booking.value.bookingAt != null)
               Container(
-                width: 80,
+                height: 80,
+                width: 60,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                        DateFormat('HH:mm', Get.locale.toString())
-                            .format(_booking.value.bookingAt),
-                        maxLines: 1,
-                        style: Get.textTheme.bodyText2.merge(
-                          TextStyle(
-                              color: Get.theme.colorScheme.secondary,
-                              height: 1.4),
-                        ),
-                        softWrap: false,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade),
-                    Text(
-                        DateFormat('dd', Get.locale.toString())
-                            .format(_booking.value.bookingAt ?? ''),
-                        maxLines: 1,
-                        style: Get.textTheme.headline3.merge(
-                          TextStyle(
-                              color: Get.theme.colorScheme.secondary,
-                              height: 1),
-                        ),
-                        softWrap: false,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade),
+                    // Text(
+                    //     DateFormat('', Get.locale.toString())
+                    //         .format(_booking.value.bookingAt),
+                    //     maxLines: 1,
+                    //     style: Get.textTheme.bodyText2.merge(
+                    //       TextStyle(
+                    //           color: Get.theme.colorScheme.secondary,
+                    //           height: 1.4),
+                    //     ),
+                    //     softWrap: false,
+                    //     textAlign: TextAlign.center,
+                    //     overflow: TextOverflow.fade),
+                    Center(
+                      child: Text(
+                          DateFormat('dd', Get.locale.toString())
+                              .format(_booking.value.bookingAt ?? ''),
+                          maxLines: 1,
+                          style: Get.textTheme.headline3.merge(
+                            TextStyle(
+                                color: Get.theme.colorScheme.secondary,
+                                height: 1),
+                          ),
+                          softWrap: false,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.fade),
+                    ),
                     Text(
                         DateFormat('MMM', Get.locale.toString())
                             .format(_booking.value.bookingAt ?? ''),
@@ -814,8 +836,8 @@ class BookingView extends GetView<BookingController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Contact Customer".tr, style: Get.textTheme.subtitle2),
-                Text(_booking.user?.phoneNumber ?? '',
-                    style: Get.textTheme.caption),
+                // Text(_booking.user?.phoneNumber ?? '',
+                //     style: Get.textTheme.caption),
               ],
             ),
           ),
@@ -823,24 +845,24 @@ class BookingView extends GetView<BookingController> {
               ? Wrap(
                   spacing: 5,
                   children: [
-                    MaterialButton(
-                      onPressed: () {
-                        print("phone number ${_booking.user.phoneNumber}");
-                        launchUrlString(
-                            "tel:${_booking.user?.phoneNumber ?? ''}");
-                      },
-                      height: 44,
-                      minWidth: 44,
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      color: Get.theme.colorScheme.secondary.withOpacity(0.2),
-                      child: Icon(
-                        Icons.phone_android_outlined,
-                        color: Get.theme.colorScheme.secondary,
-                      ),
-                      elevation: 0,
-                    ),
+                    // MaterialButton(
+                    //   onPressed: () {
+                    //     print("phone number ${_booking.user.phoneNumber}");
+                    //     launchUrlString(
+                    //         "tel:${_booking.user?.phoneNumber ?? ''}");
+                    //   },
+                    //   height: 44,
+                    //   minWidth: 44,
+                    //   padding: EdgeInsets.zero,
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10)),
+                    //   color: Get.theme.colorScheme.secondary.withOpacity(0.2),
+                    //   child: Icon(
+                    //     Icons.phone_android_outlined,
+                    //     color: Get.theme.colorScheme.secondary,
+                    //   ),
+                    //   elevation: 0,
+                    // ),
                     MaterialButton(
                       onPressed: () async {
                         controller.messages.value = [];

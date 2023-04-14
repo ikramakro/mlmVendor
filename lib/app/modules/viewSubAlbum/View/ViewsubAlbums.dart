@@ -62,7 +62,6 @@ class ViewSubAlbums extends GetView<ViewSubAlbumsController> {
                         ),
                       ),
                     ));
-                return SizedBox();
               },
             ).paddingOnly(top: 15)));
   }

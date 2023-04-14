@@ -6,6 +6,7 @@ import '../../../models/category_model.dart';
 import '../../../models/e_provider_model.dart';
 import '../../../models/media_model.dart';
 import '../../../services/settings_service.dart';
+import '../../global_widgets/image_field_widget.dart';
 import '../../global_widgets/images_field_widget.dart';
 import '../../global_widgets/phone_field_widget.dart';
 import '../../global_widgets/single_select_dialog.dart';
@@ -114,20 +115,20 @@ class EProviderFormView extends GetView<EProviderFormController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HorizontalStepperWidget(
-                  controller: new ScrollController(initialScrollOffset: 50),
+                  controller: new ScrollController(initialScrollOffset: 0),
                   steps: [
                     StepWidget(
                       title: Text(
-                        "Addresses".tr,
+                        "Business Page".tr,
                       ),
-                      color: Get.theme.focusColor,
                       index: Text("1",
                           style: TextStyle(color: Get.theme.primaryColor)),
                     ),
                     StepWidget(
                       title: Text(
-                        "Provider Details".tr,
+                        "Address".tr,
                       ),
+                      color: Get.theme.focusColor,
                       index: Text("2",
                           style: TextStyle(color: Get.theme.primaryColor)),
                     ),
@@ -141,11 +142,70 @@ class EProviderFormView extends GetView<EProviderFormController> {
                     ),
                   ],
                 ),
-                Text("Provider details".tr, style: Get.textTheme.headline5)
+
+                Text("Business Page".tr, style: Get.textTheme.headline5)
                     .paddingOnly(top: 25, bottom: 0, right: 22, left: 22),
                 Text("Fill the following details and save them".tr,
                         style: Get.textTheme.caption)
                     .paddingSymmetric(horizontal: 22, vertical: 5),
+                Obx(() {
+                  return ImageFieldWidget(
+                    label: "Image".tr,
+                    field: 'avatar',
+                    tag: controller.eProviderForm.hashCode.toString(),
+                    initialImage: controller.avatar.value,
+                    uploadCompleted: (uuid) {
+                      controller.avatar.value = new Media(id: uuid);
+                    },
+                    reset: (uuid) {
+                      controller.avatar.value =
+                          new Media(thumb: controller.user.value.avatar.thumb);
+                    },
+                  );
+                }),
+                Container(
+                    padding: EdgeInsets.only(
+                        top: 20, bottom: 14, left: 20, right: 20),
+                    margin:
+                        EdgeInsets.only(left: 20, right: 20, top: 0, bottom: 0),
+                    decoration: BoxDecoration(
+                        color: Get.theme.primaryColor,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Get.theme.focusColor.withOpacity(0.1),
+                              blurRadius: 10,
+                              offset: Offset(0, 5)),
+                        ],
+                        border: Border.all(
+                            color: Get.theme.focusColor.withOpacity(0.05))),
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            controller.available_status.value,
+                            style: Get.textTheme.bodyText1,
+                            textAlign: TextAlign.start,
+                          ),
+                          Switch(
+                              value: controller.availableStatusValueBool.value,
+                              onChanged: (value) {
+                                controller.availableStatusValueBool.value =
+                                    !controller.availableStatusValueBool.value;
+                                if (value) {
+                                  controller.availableStatusValue.value = 1;
+                                  controller.available_status.value =
+                                      "available to get orders";
+                                } else {
+                                  controller.availableStatusValue.value = 0;
+                                  controller.available_status.value =
+                                      "Unavailable to get orders";
+                                }
+                              })
+                        ],
+                      ),
+                    )),
                 Obx(() {
                   return ImagesFieldWidget(
                     label: "Images".tr,
@@ -200,21 +260,21 @@ class EProviderFormView extends GetView<EProviderFormController> {
                         phone.completeNumber;
                   },
                 ),
-                PhoneFieldWidget(
-                  // readOnly: true,
-                  labelText: "Mobile Number".tr,
-                  hintText: "223 665 7896".tr,
-                  initialCountryCode: Helper.getPhoneNumber(
-                          controller.eProvider.value.mobileNumber)
-                      ?.countryISOCode,
-                  initialValue: Helper.getPhoneNumber(
-                          controller.eProvider.value.mobileNumber)
-                      ?.number,
-                  onSaved: (phone) {
-                    return controller.eProvider.value.mobileNumber =
-                        phone.completeNumber;
-                  },
-                ),
+                // PhoneFieldWidget(
+                //   // readOnly: true,
+                //   labelText: "Mobile Number".tr,
+                //   hintText: "223 665 7896".tr,
+                //   initialCountryCode: Helper.getPhoneNumber(
+                //           controller.eProvider.value.mobileNumber)
+                //       ?.countryISOCode,
+                //   initialValue: Helper.getPhoneNumber(
+                //           controller.eProvider.value.mobileNumber)
+                //       ?.number,
+                //   onSaved: (phone) {
+                //     return controller.eProvider.value.mobileNumber =
+                //         phone.completeNumber;
+                //   },
+                // ),
                 TextFieldWidget(
                   onSaved: (input) => controller.eProvider.value
                       .availabilityRange = double.tryParse(input) ?? 0,

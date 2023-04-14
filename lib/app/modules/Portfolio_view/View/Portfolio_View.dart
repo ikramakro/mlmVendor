@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_routes.dart';
+import '../../EditPortfolio/View/EditPortfolio.dart';
 import '../controllers/PortfolioViewController.dart';
 
 class PortfolioView extends GetView<PortfolioViewController> {
@@ -26,7 +27,7 @@ class PortfolioView extends GetView<PortfolioViewController> {
                   itemCount: controller.galleries.length,
                   scrollDirection: Axis.vertical,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
+                      crossAxisCount: 2,
                       crossAxisSpacing: 5.0,
                       mainAxisSpacing: 5.0),
                   itemBuilder: (context, index) {
@@ -34,6 +35,7 @@ class PortfolioView extends GetView<PortfolioViewController> {
                       onTap: () {
                         print(
                             "this is the discriotion of image ${controller.galleries[index]}");
+
                         Get.toNamed(Routes.Edit_Portfolio, arguments: {
                           'gallery': controller.galleries[index],
                           'hero': 'portfolio',

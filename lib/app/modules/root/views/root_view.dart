@@ -21,19 +21,19 @@ class RootView extends GetView<RootController> {
           },
           children: [
             CustomBottomNavigationItem(
-              icon: Icons.home_outlined,
+              icon: Icons.home,
               label: "Home".tr,
             ),
             CustomBottomNavigationItem(
-              icon: Icons.star_border,
+              icon: Icons.star,
               label: "Reviews".tr,
             ),
             CustomBottomNavigationItem(
-              icon: Icons.chat_outlined,
+              icon: Icons.chat,
               label: "Chats".tr,
             ),
             CustomBottomNavigationItem(
-              icon: Icons.person_outline,
+              icon: Icons.person,
               label: "Account".tr,
             ),
           ],
